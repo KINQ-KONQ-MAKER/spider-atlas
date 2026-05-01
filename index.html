@@ -1,0 +1,2467 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Encyclopédie des Araignées — Classification complète</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f0e0c;
+  --surface: #181714;
+  --card: #1d1b18;
+  --card-hover: #222018;
+  --border: #2a2825;
+  --border-hover: #3d3a34;
+  --accent: #d4a853;
+  --accent-dim: #8a6c32;
+  --accent-bg: rgba(212,168,83,0.08);
+  --text: #e8e3d8;
+  --text2: #a09888;
+  --text3: #5c5650;
+  --danger: #c0392b;
+  --warn: #d4a853;
+  --safe: #3d8a5c;
+  --info: #3a7fb5;
+  --tag-bg: rgba(255,255,255,0.05);
+  --tag-border: rgba(255,255,255,0.08);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ── HEADER ── */
+.hero {
+  background: linear-gradient(180deg, #1a1610 0%, var(--bg) 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 48px 32px 40px;
+  text-align: center;
+}
+.hero-eyebrow {
+  font-size: 10px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 400;
+  color: var(--text);
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+.hero h1 em { color: var(--accent); font-style: italic; }
+.hero-sub {
+  color: var(--text2);
+  font-size: 0.875rem;
+  margin: 12px 0 32px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Stats */
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+  max-width: 700px;
+  margin: 0 auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.stat {
+  flex: 1;
+  min-width: 120px;
+  padding: 16px 20px;
+  border-right: 1px solid var(--border);
+  text-align: center;
+}
+.stat:last-child { border-right: none; }
+.stat-n {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--accent);
+  display: block;
+  line-height: 1;
+}
+.stat-l {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text3);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* ── CONTROLS ── */
+.controls {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(15,14,12,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 32px;
+}
+.controls-row1 {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+}
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text3);
+  width: 14px;
+}
+input[type="search"] {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 9px 12px 9px 36px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-family: 'IBM Plex Sans', sans-serif;
+  outline: none;
+  transition: border-color 0.2s;
+}
+input[type="search"]:focus { border-color: var(--accent-dim); }
+input[type="search"]::placeholder { color: var(--text3); }
+
+.result-count {
+  color: var(--text3);
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.view-toggle { display: flex; gap: 6px; }
+.vbtn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text3);
+  padding: 7px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.15s;
+}
+.vbtn.active, .vbtn:hover {
+  background: var(--accent-bg);
+  border-color: var(--accent-dim);
+  color: var(--accent);
+}
+
+.controls-row2 {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.filter-group {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+.filter-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text3);
+  font-weight: 500;
+  white-space: nowrap;
+  padding: 0 4px;
+}
+select {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text2);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-family: 'IBM Plex Sans', sans-serif;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  padding-right: 24px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235c5650' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+  transition: border-color 0.2s;
+}
+select:focus, select:hover { border-color: var(--accent-dim); color: var(--text); }
+
+.clear-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text3);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  font-family: 'IBM Plex Sans', sans-serif;
+  transition: all 0.15s;
+  margin-left: auto;
+}
+.clear-btn:hover { border-color: var(--accent-dim); color: var(--accent); }
+
+/* ── MAIN LAYOUT ── */
+.main {
+  display: flex;
+  min-height: calc(100vh - 200px);
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border);
+  padding: 20px 0;
+  position: sticky;
+  top: 120px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.sidebar-title {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--text3);
+  padding: 0 20px 10px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 8px;
+}
+
+.order-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--text2);
+  padding: 7px 20px;
+  font-size: 0.8rem;
+  font-family: 'IBM Plex Sans', sans-serif;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: left;
+  gap: 6px;
+}
+.order-btn:hover { background: var(--accent-bg); color: var(--text); }
+.order-btn.active { background: var(--accent-bg); color: var(--accent); font-weight: 500; }
+.order-count {
+  font-size: 10px;
+  color: var(--text3);
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 1px 6px;
+  flex-shrink: 0;
+}
+
+/* Content */
+.content {
+  flex: 1;
+  padding: 24px 28px;
+  min-width: 0;
+}
+
+/* Grid view */
+.grid-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+/* List view */
+.list-view { display: flex; flex-direction: column; gap: 8px; }
+
+/* Family card */
+.fcard {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s, background 0.2s;
+  cursor: pointer;
+}
+.fcard:hover { border-color: var(--border-hover); background: var(--card-hover); }
+.fcard.active { border-color: var(--accent-dim); }
+
+.fcard-header {
+  padding: 14px 16px 10px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.fcard-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  background: var(--surface);
+}
+.fcard-titles { flex: 1; min-width: 0; }
+.fname {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--accent);
+  line-height: 1.2;
+}
+.fcommon {
+  font-size: 0.75rem;
+  color: var(--text3);
+  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fcard-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 0 16px 8px;
+}
+.tag {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  border: 1px solid;
+}
+.tag-danger { background: rgba(192,57,43,0.15); color: #e87c70; border-color: rgba(192,57,43,0.3); }
+.tag-warn { background: rgba(212,168,83,0.12); color: var(--accent); border-color: rgba(212,168,83,0.25); }
+.tag-safe { background: rgba(61,138,92,0.12); color: #6dbf89; border-color: rgba(61,138,92,0.25); }
+.tag-info { background: rgba(58,127,181,0.12); color: #6badd6; border-color: rgba(58,127,181,0.25); }
+.tag-neutral { background: var(--tag-bg); color: var(--text2); border-color: var(--tag-border); }
+
+.fcard-meta {
+  padding: 0 16px 12px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.meta-key {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text3);
+  font-weight: 500;
+}
+.meta-val {
+  font-size: 0.78rem;
+  color: var(--text2);
+}
+
+.fcard-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0 16px;
+}
+
+.species-section {
+  padding: 10px 16px 12px;
+  display: none;
+}
+.species-section.open { display: block; }
+.species-title {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text3);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.species-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.sp-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 3px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+.sp-row:last-child { border-bottom: none; }
+.sp-fr { font-size: 0.8rem; color: var(--text); flex: 1; min-width: 0; }
+.sp-sci { font-size: 0.72rem; color: var(--text3); font-style: italic; flex: 1; min-width: 0; }
+.sp-flag { font-size: 12px; flex-shrink: 0; }
+
+.toggle-sp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 8px 16px;
+  background: none;
+  border: none;
+  border-top: 1px solid var(--border);
+  width: 100%;
+  color: var(--text3);
+  font-size: 0.75rem;
+  font-family: 'IBM Plex Sans', sans-serif;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.toggle-sp:hover { background: var(--accent-bg); color: var(--accent); }
+.toggle-sp svg { width: 12px; height: 12px; transition: transform 0.2s; }
+.toggle-sp.open svg { transform: rotate(180deg); }
+
+/* List card */
+.lcard {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.lcard:hover { border-color: var(--border-hover); background: var(--card-hover); }
+.lcard.active { border-color: var(--accent-dim); }
+.lcard-icon { font-size: 20px; width: 32px; text-align: center; flex-shrink: 0; }
+.lcard-name { flex: 0 0 200px; }
+.lcard-fname { font-family: 'Playfair Display', serif; font-size: 0.9rem; font-style: italic; color: var(--accent); }
+.lcard-common { font-size: 0.72rem; color: var(--text3); }
+.lcard-tags { display: flex; gap: 4px; flex-wrap: wrap; flex: 1; }
+.lcard-meta { display: flex; gap: 20px; flex-shrink: 0; }
+.lcard-mitem { text-align: right; }
+.lcard-mk { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: var(--text3); font-weight: 500; }
+.lcard-mv { font-size: 0.78rem; color: var(--text2); }
+.lcard-arrow { color: var(--text3); font-size: 12px; flex-shrink: 0; }
+.lcard-species {
+  display: none;
+  padding: 12px 16px 14px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 0 0 8px 8px;
+}
+.lcard-species.open { display: block; }
+.lcard-wrapper { border-radius: 8px; overflow: hidden; }
+
+/* No results */
+.no-results {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 80px 0;
+  color: var(--text3);
+}
+.no-results-icon { font-size: 40px; margin-bottom: 16px; }
+.no-results p { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; }
+
+/* Danger indicator */
+.danger-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+.dd-1 { background: var(--safe); }
+.dd-2 { background: #8bc34a; }
+.dd-3 { background: var(--warn); }
+.dd-4 { background: #e67e22; }
+.dd-5 { background: var(--danger); }
+
+/* Footnote */
+.footnote {
+  text-align: center;
+  padding: 32px;
+  color: var(--text3);
+  font-size: 0.75rem;
+  border-top: 1px solid var(--border);
+  line-height: 1.8;
+}
+
+/* Scrollbar global */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fcard, .lcard-wrapper { animation: fadeIn 0.3s ease both; }
+
+/* iOS Safari fixes */
+.toggle-sp, .lcard, .vbtn, .tab, .order-btn, .clear-btn {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+button { -webkit-appearance: none; }
+input[type="search"] { -webkit-appearance: none; border-radius: 8px; }
+
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <p class="hero-eyebrow">Ordre Araneae · Classification Mondiale</p>
+  <h1>Les <em>Araignées</em></h1>
+  <p class="hero-sub">Classification complète des familles d'araignées avec espèces représentatives, données morphologiques, géographiques et comportementales.</p>
+  <div class="stats">
+    <div class="stat"><span class="stat-n">48 200+</span><span class="stat-l">Espèces décrites</span></div>
+    <div class="stat"><span class="stat-n">129</span><span class="stat-l">Familles</span></div>
+    <div class="stat"><span class="stat-n">4 306</span><span class="stat-l">Genres</span></div>
+    <div class="stat"><span class="stat-n">55</span><span class="stat-l">Familles couvertes</span></div>
+    <div class="stat"><span class="stat-n">444+</span><span class="stat-l">Espèces listées</span></div>
+  </div>
+</div>
+
+<div class="controls">
+  <div class="controls-row1">
+    <div class="search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="search" id="search" placeholder="Rechercher une famille, une espèce…">
+    </div>
+    <span class="result-count" id="rcount"></span>
+    <div class="view-toggle">
+      <button class="vbtn active" id="vgrid" title="Vue grille">⊞ Grille</button>
+      <button class="vbtn" id="vlist" title="Vue liste">☰ Liste</button>
+    </div>
+  </div>
+  <div class="controls-row2">
+    <div class="filter-group">
+      <span class="filter-label">Continent</span>
+      <select id="f-continent">
+        <option value="">Tous</option>
+        <option value="europe">Europe</option>
+        <option value="afrique">Afrique</option>
+        <option value="asie">Asie</option>
+        <option value="amerique_nord">Amérique du Nord</option>
+        <option value="amerique_sud">Amérique du Sud</option>
+        <option value="oceanie">Océanie</option>
+        <option value="cosmopolite">Cosmopolite</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Danger</span>
+      <select id="f-danger">
+        <option value="">Tous</option>
+        <option value="5">⚠ Très dangereux</option>
+        <option value="4">Dangereux</option>
+        <option value="3">Modéré</option>
+        <option value="2">Faible</option>
+        <option value="1">Inoffensif</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Taille</span>
+      <select id="f-taille">
+        <option value="">Toutes</option>
+        <option value="micro">Micro (&lt; 3 mm)</option>
+        <option value="petit">Petite (3–10 mm)</option>
+        <option value="moyen">Moyenne (10–30 mm)</option>
+        <option value="grand">Grande (30–60 mm)</option>
+        <option value="geant">Géante (&gt; 60 mm)</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Toile</span>
+      <select id="f-toile">
+        <option value="">Tous</option>
+        <option value="orbitele">Orbitèle (ronde)</option>
+        <option value="nappe">En nappe</option>
+        <option value="entonnoir">En entonnoir</option>
+        <option value="cobweb">Cobweb (irrégulière)</option>
+        <option value="pas_de_toile">Pas de toile</option>
+        <option value="terrier">Terrier</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Habitat</span>
+      <select id="f-habitat">
+        <option value="">Tous</option>
+        <option value="foret">Forêt</option>
+        <option value="prairie">Prairie / Jardin</option>
+        <option value="maison">Intérieur / Maison</option>
+        <option value="grotte">Grottes</option>
+        <option value="desert">Désert / Zones arides</option>
+        <option value="tropical">Tropical</option>
+        <option value="aquatique">Zones aquatiques</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Régime</span>
+      <select id="f-regime">
+        <option value="">Tous</option>
+        <option value="insectes">Insectes</option>
+        <option value="araignees">Araignées (aranéophage)</option>
+        <option value="vertébrés">Petits vertébrés</option>
+        <option value="aquatique_proies">Proies aquatiques</option>
+      </select>
+    </div>
+    <button class="clear-btn" id="clear-btn">✕ Effacer les filtres</button>
+  </div>
+</div>
+
+<div class="main">
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-title">Parcourir par ordre</div>
+    <div id="order-list"></div>
+  </nav>
+  <div class="content">
+    <div id="grid-container" class="grid-view"></div>
+    <div id="list-container" class="list-view" style="display:none"></div>
+    <div class="footnote">
+      Source : World Spider Catalog (WSC) 2024 · Données compilées à des fins pédagogiques.<br>
+      La taxonomie évolue constamment — certaines familles ont été récemment réorganisées.<br>
+      Tailles indiquées : corps seul (sans pattes). Dangerosité : échelle 1–5 (1 = inoffensif, 5 = potentiellement mortel).
+    </div>
+  </div>
+</div>
+
+<script>
+const DATA = [
+  {
+    id:"araneidae", name:"Araneidae", common:"Épeires / Araignées orbitèles",
+    icon:"🕷️", ordre:"Araneomorphae",
+    especes:3077, genres:172,
+    taille:"moyen", taille_mm:"5–30 mm", danger:1,
+    continents:["cosmopolite"], toile:"orbitele",
+    habitat:["foret","prairie"],
+    regime:["insectes"],
+    description:"La plus grande famille d'araignées tisseuses. Toiles orbitèles classiques en spirale. Chélicères verticaux.",
+    tags:[{l:"Tisseuses",c:"info"},{l:"Inoffensives",c:"safe"},{l:"Cosmopolites",c:"neutral"}],
+    species:[
+      {fr:"Épeire diadème",sci:"Araneus diadematus",flag:"🇪🇺"},
+      {fr:"Argiope frelon",sci:"Argiope bruennichi",flag:"🇪🇺"},
+      {fr:"Épeire des roseaux",sci:"Larinioides cornutus",flag:"🇪🇺"},
+      {fr:"Épeire chêne",sci:"Aculepeira ceropegia",flag:"🇪🇺"},
+      {fr:"Épeire des jardins",sci:"Neoscona adianta",flag:"🇪🇺"},
+      {fr:"Argiope lobée",sci:"Argiope lobata",flag:"🇪🇺"},
+      {fr:"Argiope argentée",sci:"Argiope argentata",flag:"🌎"},
+      {fr:"Épeire des haies",sci:"Araneus angulatus",flag:"🇪🇺"},
+      {fr:"Épeire poire",sci:"Araneus pyramidatus",flag:"🇪🇺"},
+      {fr:"Épeire des marais",sci:"Araneus marmoreus",flag:"🇪🇺"},
+      {fr:"Aranéide géante dorée",sci:"Trichonephila clavipes",flag:"🌎"},
+      {fr:"Épeire de soie",sci:"Cyclosa conica",flag:"🌍"},
+      {fr:"Épeire quatre-points",sci:"Araneus quadratus",flag:"🇪🇺"},
+      {fr:"Épeire nordique",sci:"Araneus nordmanni",flag:"🇪🇺"},
+      {fr:"Épeire des bois",sci:"Araneus sturmi",flag:"🇪🇺"},
+      {fr:"Argiope trifasciée",sci:"Argiope trifasciata",flag:"🌍"},
+      {fr:"Argiope de Banded",sci:"Argiope appensa",flag:"🌏"},
+      {fr:"Argiope du Japon",sci:"Argiope amoena",flag:"🌏"},
+      {fr:"Gasteracantha cancriformis",sci:"Gasteracantha cancriformis",flag:"🌎"},
+      {fr:"Araignée épineuse dorée",sci:"Gasteracantha doriae",flag:"🌏"},
+      {fr:"Araignée épineuse rouge",sci:"Gasteracantha fornicata",flag:"🌏"},
+      {fr:"Araignée kiwi épineuse",sci:"Austracantha minax",flag:"🇦🇺"},
+      {fr:"Araignée roue de chariot",sci:"Eriophora transmarina",flag:"🇦🇺"},
+      {fr:"Carosella frontalis",sci:"Carosella frontalis",flag:"🌎"},
+      {fr:"Épeire des ponts",sci:"Larinioides sclopetarius",flag:"🇪🇺"},
+      {fr:"Épeire bizarre",sci:"Gibbaranea bituberculata",flag:"🇪🇺"},
+      {fr:"Cyclosa insulana",sci:"Cyclosa insulana",flag:"🌍"},
+      {fr:"Cyclosa mulmeinensis",sci:"Cyclosa mulmeinensis",flag:"🌏"},
+      {fr:"Micrathena gracilis",sci:"Micrathena gracilis",flag:"🇺🇸"},
+      {fr:"Micrathena sagittata",sci:"Micrathena sagittata",flag:"🇺🇸"},
+      {fr:"Araignée bolas",sci:"Mastophora cornigera",flag:"🇺🇸"},
+      {fr:"Araignée bolas australienne",sci:"Ordgarius magnificus",flag:"🇦🇺"},
+      {fr:"Araignée lanterne",sci:"Singa hamata",flag:"🇪🇺"},
+      {fr:"Épeire à couronne",sci:"Araneus alsine",flag:"🇪🇺"},
+    ]
+  },
+  {
+    id:"theridiidae", name:"Theridiidae", common:"Veuves / Araignées cobweb",
+    icon:"☠️", ordre:"Araneomorphae",
+    especes:2507, genres:124,
+    taille:"petit", taille_mm:"2–15 mm", danger:5,
+    continents:["cosmopolite"], toile:"cobweb",
+    habitat:["maison","foret","prairie"],
+    regime:["insectes"],
+    description:"Famille incluant les redoutables veuves noires. Toiles irrégulières en cobweb. Venin neurotoxique puissant.",
+    tags:[{l:"Très dangereux",c:"danger"},{l:"Venin neurotoxique",c:"danger"},{l:"Cobweb",c:"info"}],
+    species:[
+      {fr:"Veuve noire américaine",sci:"Latrodectus mactans",flag:"🇺🇸"},
+      {fr:"Veuve noire du Nord",sci:"Latrodectus variolus",flag:"🇺🇸"},
+      {fr:"Veuve brune",sci:"Latrodectus geometricus",flag:"🌍"},
+      {fr:"Malmignatte (veuve noire méditerranéenne)",sci:"Latrodectus tredecimguttatus",flag:"🇪🇺"},
+      {fr:"Veuve rouge d'Australie",sci:"Latrodectus hasselti",flag:"🇦🇺"},
+      {fr:"Veuve noire d'Afrique du Sud",sci:"Latrodectus indistinctus",flag:"🌍"},
+      {fr:"Veuve noire d'Afrique de l'Est",sci:"Latrodectus rhodesiensis",flag:"🌍"},
+      {fr:"Veuve noire du Pérou",sci:"Latrodectus thoracicus",flag:"🌎"},
+      {fr:"Veuve noire d'Europe",sci:"Latrodectus pallidus",flag:"🇪🇺"},
+      {fr:"Veuve noire de Nouvelle-Zélande",sci:"Latrodectus katipo",flag:"🇳🇿"},
+      {fr:"Fausse veuve robuste",sci:"Steatoda grossa",flag:"🌍"},
+      {fr:"Fausse veuve noble",sci:"Steatoda nobilis",flag:"🌍"},
+      {fr:"Fausse veuve bicolore",sci:"Steatoda bipunctata",flag:"🇪🇺"},
+      {fr:"Fausse veuve triangulaire",sci:"Steatoda triangulosa",flag:"🌍"},
+      {fr:"Fausse veuve à pattes variables",sci:"Steatoda paykulliana",flag:"🇪🇺"},
+      {fr:"Araignée des maisons",sci:"Achaearanea tepidariorum",flag:"🌍"},
+      {fr:"Theridiide parachute",sci:"Episinus truncatus",flag:"🇪🇺"},
+      {fr:"Cobweb des jardins",sci:"Enoplognatha ovata",flag:"🇪🇺"},
+      {fr:"Enoplognatha latimana",sci:"Enoplognatha latimana",flag:"🇪🇺"},
+      {fr:"Araignée des bacs à fleurs",sci:"Parasteatoda tepidariorum",flag:"🌍"},
+      {fr:"Araignée dentelle",sci:"Theridion impressum",flag:"🇪🇺"},
+      {fr:"Theridion varians",sci:"Theridion varians",flag:"🇪🇺"},
+      {fr:"Theridion pictum",sci:"Theridion pictum",flag:"🇪🇺"},
+      {fr:"Phylloneta sisyphia",sci:"Phylloneta sisyphia",flag:"🇪🇺"},
+      {fr:"Anelosimus eximius (colonial)",sci:"Anelosimus eximius",flag:"🌎"},
+      {fr:"Araignée sociale géante",sci:"Anelosimus domingo",flag:"🌎"},
+      {fr:"Araignée sociale de Madagascar",sci:"Anelosimus baeza",flag:"🌍"},
+      {fr:"Dipoena melanogaster",sci:"Dipoena melanogaster",flag:"🇪🇺"},
+      {fr:"Crustulina guttata",sci:"Crustulina guttata",flag:"🇪🇺"},
+      {fr:"Asagena phalerata",sci:"Asagena phalerata",flag:"🇪🇺"},
+    ]
+  },
+  {
+    id:"linyphiidae", name:"Linyphiidae", common:"Araignées à toile en nappe",
+    icon:"🕸️", ordre:"Araneomorphae",
+    especes:4686, genres:614,
+    taille:"micro", taille_mm:"1–8 mm", danger:1,
+    continents:["cosmopolite"], toile:"nappe",
+    habitat:["foret","prairie"],
+    regime:["insectes"],
+    description:"Seconde plus grande famille. Minuscules araignées qui construisent des toiles en nappe horizontale. Très nombreuses espèces dans les herbes et feuilles mortes.",
+    tags:[{l:"Inoffensives",c:"safe"},{l:"Toile en nappe",c:"info"},{l:"Micro",c:"neutral"}],
+    species:[
+      {fr:"Linyphie triangulaire",sci:"Linyphia triangularis",flag:"🇪🇺"},
+      {fr:"Érigone noire",sci:"Erigone atra",flag:"🇪🇺"},
+      {fr:"Linyphie des forêts",sci:"Neriene peltata",flag:"🇪🇺"},
+      {fr:"Linyphie gracieuse",sci:"Bathyphantes gracilis",flag:"🇪🇺"},
+      {fr:"Linyphie des prairies",sci:"Microlinyphia pusilla",flag:"🇪🇺"},
+      {fr:"Tapissière",sci:"Tapinopa longidens",flag:"🇪🇺"},
+      {fr:"Porrhomme allongé",sci:"Porrhomma convexum",flag:"🇪🇺"},
+      {fr:"Labulliade des herbes",sci:"Agyneta subtilis",flag:"🇪🇺"},
+    ]
+  },
+  {
+    id:"salticidae", name:"Salticidae", common:"Araignées sauteuses",
+    icon:"👀", ordre:"Araneomorphae",
+    especes:6406, genres:668,
+    taille:"petit", taille_mm:"3–22 mm", danger:1,
+    continents:["cosmopolite"], toile:"pas_de_toile",
+    habitat:["foret","prairie","tropical"],
+    regime:["insectes","araignees"],
+    description:"La plus grande famille d'araignées (en nombre d'espèces). Vision frontale exceptionnelle avec 4 paires d'yeux. Chasseuses actives sans toile.",
+    tags:[{l:"Chasseuses",c:"info"},{l:"Vision exceptionnelle",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Araignée zèbre",sci:"Salticus scenicus",flag:"🇪🇺"},
+      {fr:"Araignée sauteuse royale",sci:"Phidippus regius",flag:"🇺🇸"},
+      {fr:"Araignée paon",sci:"Maratus volans",flag:"🇦🇺"},
+      {fr:"Araignée paon nuptiale",sci:"Maratus speciosus",flag:"🇦🇺"},
+      {fr:"Araignée paon d'eau",sci:"Maratus aquilus",flag:"🇦🇺"},
+      {fr:"Araignée paon étoilée",sci:"Maratus karrie",flag:"🇦🇺"},
+      {fr:"Portia (chasseuse d'araignées)",sci:"Portia labiata",flag:"🌏"},
+      {fr:"Portia africaine",sci:"Portia africana",flag:"🌍"},
+      {fr:"Hyllus de Diard",sci:"Hyllus diardi",flag:"🌏"},
+      {fr:"Sauteuse dorée",sci:"Chrysilla lauta",flag:"🌏"},
+      {fr:"Euophryde fardée",sci:"Euophrys frontalis",flag:"🇪🇺"},
+      {fr:"Heliophane cuivré",sci:"Heliophanus cupreus",flag:"🇪🇺"},
+      {fr:"Sauteuse des fenêtres",sci:"Marpissa muscosa",flag:"🇪🇺"},
+      {fr:"Sauteuse rubis",sci:"Phidippus johnsoni",flag:"🇺🇸"},
+      {fr:"Phidippus audax",sci:"Phidippus audax",flag:"🇺🇸"},
+      {fr:"Sauteuse fourmi",sci:"Myrmarachne formicaria",flag:"🇪🇺"},
+      {fr:"Sauteuse fourmi géante",sci:"Myrmarachne melanotarsa",flag:"🌍"},
+      {fr:"Sauteuse verte",sci:"Lyssomanes viridis",flag:"🇺🇸"},
+      {fr:"Sauteuse à lunettes",sci:"Hasarius adansoni",flag:"🌍"},
+      {fr:"Plexippus paykulli",sci:"Plexippus paykulli",flag:"🌍"},
+      {fr:"Sauteuse à gorge rouge",sci:"Pellenes tripunctatus",flag:"🇪🇺"},
+      {fr:"Sauteuse des murs",sci:"Menemerus bivittatus",flag:"🌍"},
+      {fr:"Telamonia dimidiata",sci:"Telamonia dimidiata",flag:"🌏"},
+      {fr:"Sauteuse de l'Himalaya",sci:"Euophrys omnisuperstes",flag:"🌏"},
+      {fr:"Araignée paon de Jürgen",sci:"Maratus jactatus",flag:"🇦🇺"},
+      {fr:"Colonus sylvanus",sci:"Colonus sylvanus",flag:"🇦🇺"},
+      {fr:"Thiania bhamoensis",sci:"Thiania bhamoensis",flag:"🌏"},
+      {fr:"Sauteuse tigre",sci:"Pseudicius encarpatus",flag:"🇪🇺"},
+      {fr:"Sauteuse des lichens",sci:"Neon reticulatus",flag:"🇪🇺"},
+      {fr:"Sauteuse de Sauter",sci:"Saitis barbipes",flag:"🇪🇺"},
+      {fr:"Evarcha arcuata",sci:"Evarcha arcuata",flag:"🇪🇺"},
+      {fr:"Sauteuse des sables",sci:"Pellenes geniculatus",flag:"🇪🇺"},
+    ]
+  },
+  {
+    id:"lycosidae", name:"Lycosidae", common:"Araignées-loups",
+    icon:"🐺", ordre:"Araneomorphae",
+    especes:2431, genres:124,
+    taille:"moyen", taille_mm:"5–35 mm", danger:2,
+    continents:["cosmopolite"], toile:"pas_de_toile",
+    habitat:["prairie","foret","desert"],
+    regime:["insectes"],
+    description:"Chasseuses nocturnes rapides. Femelles portent leurs œufs puis les jeunes sur le dos. Yeux reflétant la lumière la nuit.",
+    tags:[{l:"Chasseuses",c:"info"},{l:"Terrestres",c:"neutral"},{l:"Faible danger",c:"warn"}],
+    species:[
+      {fr:"Tarentule de Provence",sci:"Lycosa tarantula",flag:"🇪🇺"},
+      {fr:"Araignée-loup de Caroline",sci:"Hogna carolinensis",flag:"🇺🇸"},
+      {fr:"Pardose des prairies",sci:"Pardosa amentata",flag:"🇪🇺"},
+      {fr:"Pardose à palpes noirs",sci:"Pardosa lugubris",flag:"🇪🇺"},
+      {fr:"Pardose des terres humides",sci:"Pardosa palustris",flag:"🇪🇺"},
+      {fr:"Pardose agile",sci:"Pardosa agrestis",flag:"🇪🇺"},
+      {fr:"Pardose annelée",sci:"Pardosa annulata",flag:"🇪🇺"},
+      {fr:"Alopécose poussiéreuse",sci:"Alopecosa pulverulenta",flag:"🇪🇺"},
+      {fr:"Alopécose cubicoide",sci:"Alopecosa cuneata",flag:"🇪🇺"},
+      {fr:"Alopécose trabalis",sci:"Alopecosa trabalis",flag:"🇪🇺"},
+      {fr:"Trochose terrestre",sci:"Trochosa terricola",flag:"🇪🇺"},
+      {fr:"Trochose ruricole",sci:"Trochosa ruricola",flag:"🇪🇺"},
+      {fr:"Pirate araignée-loup",sci:"Pirata piraticus",flag:"🇪🇺"},
+      {fr:"Lycose des sables",sci:"Arctosa perita",flag:"🇪🇺"},
+      {fr:"Lycose du littoral",sci:"Arctosa cinerea",flag:"🇪🇺"},
+      {fr:"Lycose léopard",sci:"Arctosa leopardus",flag:"🇪🇺"},
+      {fr:"Araignée-loup géante d'Afrique",sci:"Hogna ingens",flag:"🌍"},
+      {fr:"Aulonia albimana",sci:"Aulonia albimana",flag:"🇪🇺"},
+      {fr:"Araignée-loup des dunes",sci:"Geolycosa missouriensis",flag:"🇺🇸"},
+      {fr:"Araignée-loup des marais",sci:"Dolomedes scriptus",flag:"🇺🇸"},
+      {fr:"Araignée-loup de Virginie",sci:"Rabidosa rabida",flag:"🇺🇸"},
+      {fr:"Lycose à taches",sci:"Hogna radiata",flag:"🇪🇺"},
+      {fr:"Lycosa singoriensis",sci:"Lycosa singoriensis",flag:"🌏"},
+      {fr:"Pardose des tourbières",sci:"Pardosa sphagnicola",flag:"🇪🇺"},
+    ]
+  },
+  {
+    id:"thomisidae", name:"Thomisidae", common:"Araignées crabes",
+    icon:"🦀", ordre:"Araneomorphae",
+    especes:2197, genres:175,
+    taille:"petit", taille_mm:"3–20 mm", danger:1,
+    continents:["cosmopolite"], toile:"pas_de_toile",
+    habitat:["prairie","foret","tropical"],
+    regime:["insectes"],
+    description:"Araignées marchant latéralement comme des crabes. Embuscade sur fleurs. Certaines changent de couleur pour se camoufler.",
+    tags:[{l:"Embuscade",c:"info"},{l:"Camouflage",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Araignée crabe des fleurs",sci:"Misumena vatia",flag:"🇪🇺"},
+      {fr:"Thomise variable",sci:"Thomisus onustus",flag:"🇪🇺"},
+      {fr:"Xystique commun",sci:"Xysticus cristatus",flag:"🇪🇺"},
+      {fr:"Hérias velu",sci:"Heriaeus hirtus",flag:"🇪🇺"},
+      {fr:"Pistius tronqué",sci:"Pistius truncatus",flag:"🇪🇺"},
+      {fr:"Synema globosum",sci:"Synema globosum",flag:"🇪🇺"},
+      {fr:"Runcinia grammica",sci:"Runcinia grammica",flag:"🇪🇺"},
+      {fr:"Araignée crabe géante",sci:"Thomisus spectabilis",flag:"🇦🇺"},
+    ]
+  },
+  {
+    id:"theraphosidae", name:"Theraphosidae", common:"Mygales / Tarentules",
+    icon:"🦕", ordre:"Mygalomorphae",
+    especes:1052, genres:155,
+    taille:"geant", taille_mm:"30–120 mm", danger:3,
+    continents:["amerique_sud","afrique","asie","oceanie"], toile:"terrier",
+    habitat:["tropical","desert","foret"],
+    regime:["insectes","vertébrés"],
+    description:"Les plus grandes araignées du monde. Crochets venimeux puissants. La plupart sont inoffensives pour l'humain. Certaines lancent des poils urticants (Nouveau Monde).",
+    tags:[{l:"Géantes",c:"neutral"},{l:"Mygalomorphes",c:"info"},{l:"Danger modéré",c:"warn"}],
+    species:[
+      {fr:"Mygale de Leblond (Goliath)",sci:"Theraphosa blondi",flag:"🌎"},
+      {fr:"Mygale du Chili dorée",sci:"Grammostola pulchripes",flag:"🌎"},
+      {fr:"Mygale genoux rouges du Mexique",sci:"Brachypelma hamorii",flag:"🌎"},
+      {fr:"Mygale ornementale d'Inde",sci:"Poecilotheria regalis",flag:"🌏"},
+      {fr:"King Baboon",sci:"Pelinobius muticus",flag:"🌍"},
+      {fr:"Mygale cornet",sci:"Acanthoscurria geniculata",flag:"🌎"},
+      {fr:"Mygale rose du Chili",sci:"Grammostola rosea",flag:"🌎"},
+      {fr:"Mygale ornementale Sri Lanka",sci:"Poecilotheria fasciata",flag:"🌏"},
+      {fr:"Mygale cobalt",sci:"Cyriopagopus lividum",flag:"🌏"},
+      {fr:"Mygale à genoux jaunes du Mexique",sci:"Brachypelma auratum",flag:"🌎"},
+      {fr:"Mygale de Gooty (métallique bleue)",sci:"Poecilotheria metallica",flag:"🌏"},
+      {fr:"Mygale baboon de Namibie",sci:"Hysterocrates gigas",flag:"🌍"},
+      {fr:"Mygale baboon du Cameroun",sci:"Hysterocrates hercules",flag:"🌍"},
+      {fr:"Mygale tigre",sci:"Chromatopelma cyaneopubescens",flag:"🌎"},
+      {fr:"Mygale rouge à pattes noires",sci:"Brachypelma emilia",flag:"🌎"},
+      {fr:"Mygale arc-en-ciel",sci:"Nhandu chromatus",flag:"🌎"},
+      {fr:"Mygale véloce (Psalmopoeus)",sci:"Psalmopoeus cambridgei",flag:"🌎"},
+      {fr:"Mygale à corne (Ceratogyrus)",sci:"Ceratogyrus marshalli",flag:"🌍"},
+      {fr:"Mygale à corne darlingi",sci:"Ceratogyrus darlingi",flag:"🌍"},
+      {fr:"Mygale ornementale de Hanumanh",sci:"Poecilotheria hanumavilasumica",flag:"🌏"},
+      {fr:"Mygale squelette",sci:"Ephebopus murinus",flag:"🌎"},
+      {fr:"Mygale à tête rouge",sci:"Brachypelma boehmei",flag:"🌎"},
+      {fr:"Mygale ornementale de Poecil. lowel",sci:"Poecilotheria subfusca",flag:"🌏"},
+      {fr:"Mygale du Mexique à genoux oranges",sci:"Brachypelma vagans",flag:"🌎"},
+      {fr:"Mygale des palmiers",sci:"Eupalaestrus campestratus",flag:"🌎"},
+      {fr:"Mygale de l'Argentine",sci:"Grammostola iheringi",flag:"🌎"},
+      {fr:"Mygale bleue électrique (OBT)",sci:"Pterinochilus murinus",flag:"🌍"},
+      {fr:"Mygale de Stirlingi",sci:"Selenocosmia stirlingi",flag:"🇦🇺"},
+      {fr:"Mygale de Sydney",sci:"Selenocosmia crassipes",flag:"🇦🇺"},
+      {fr:"Mygale ornementale faucheuse",sci:"Poecilotheria ornata",flag:"🌏"},
+    ]
+  },
+  {
+    id:"agelenidae", name:"Agelenidae", common:"Araignées à toile en entonnoir",
+    icon:"🌪️", ordre:"Araneomorphae",
+    especes:1376, genres:82,
+    taille:"moyen", taille_mm:"5–20 mm", danger:1,
+    continents:["europe","asie","amerique_nord"], toile:"entonnoir",
+    habitat:["maison","foret","prairie"],
+    regime:["insectes"],
+    description:"Construisent des toiles en entonnoir ou tube dans les herbes, haies et maisons. L'araignée attend dans le tube.",
+    tags:[{l:"Toile en entonnoir",c:"info"},{l:"Inoffensives",c:"safe"},{l:"Europe",c:"neutral"}],
+    species:[
+      {fr:"Agélène labyrinthe",sci:"Agelena labyrinthica",flag:"🇪🇺"},
+      {fr:"Tégénaire domestique",sci:"Tegenaria domestica",flag:"🇪🇺"},
+      {fr:"Tégénaire géante",sci:"Eratigena atrica",flag:"🇪🇺"},
+      {fr:"Tégénaire des parois",sci:"Tegenaria parietina",flag:"🇪🇺"},
+      {fr:"Histopone engourdie",sci:"Histopona torpida",flag:"🇪🇺"},
+      {fr:"Coelotes terrestre",sci:"Coelotes terrestris",flag:"🇪🇺"},
+      {fr:"Agélène gallifère",sci:"Agelena labyrinthica",flag:"🇪🇺"},
+    ]
+  },
+  {
+    id:"atracidae", name:"Atracidae", common:"Araignées entonnoir australiennes",
+    icon:"☠️", ordre:"Mygalomorphae",
+    especes:35, genres:3,
+    taille:"moyen", taille_mm:"15–35 mm", danger:5,
+    continents:["oceanie"], toile:"entonnoir",
+    habitat:["foret","maison"],
+    regime:["insectes","vertébrés"],
+    description:"Parmi les araignées les plus dangereuses au monde. Venin atraxotoxique, mortel avant antidote (1981). Agressive si menacée.",
+    tags:[{l:"MORTEL",c:"danger"},{l:"Australie uniquement",c:"warn"},{l:"Venin atraxotoxique",c:"danger"}],
+    species:[
+      {fr:"Araignée entonnoir de Sydney",sci:"Atrax robustus",flag:"🇦🇺"},
+      {fr:"Araignée entonnoir du Nord",sci:"Hadronyche formidabilis",flag:"🇦🇺"},
+      {fr:"Araignée entonnoir bleue de montagne",sci:"Hadronyche versuta",flag:"🇦🇺"},
+      {fr:"Araignée entonnoir d'Illawarra",sci:"Illawarra wisharti",flag:"🇦🇺"},
+      {fr:"Araignée entonnoir arboricole",sci:"Hadronyche cerberea",flag:"🇦🇺"},
+    ]
+  },
+  {
+    id:"sicariidae", name:"Sicariidae", common:"Araignées violons / Recluses",
+    icon:"🎻", ordre:"Araneomorphae",
+    especes:163, genres:2,
+    taille:"petit", taille_mm:"6–20 mm", danger:4,
+    continents:["amerique_nord","amerique_sud","afrique","europe"], toile:"cobweb",
+    habitat:["maison","desert"],
+    regime:["insectes"],
+    description:"Venin cytotoxique causant nécroses cutanées. 6 yeux seulement (disposition dyade). Tache en forme de violon sur céphalothorax.",
+    tags:[{l:"Dangereux",c:"danger"},{l:"Venin nécrotique",c:"danger"},{l:"6 yeux",c:"neutral"}],
+    species:[
+      {fr:"Recluse brune (araignée violon)",sci:"Loxosceles reclusa",flag:"🇺🇸"},
+      {fr:"Loxoscèle roussâtre",sci:"Loxosceles rufescens",flag:"🇪🇺"},
+      {fr:"Recluse du désert",sci:"Loxosceles deserta",flag:"🇺🇸"},
+      {fr:"Loxoscèle laeta",sci:"Loxosceles laeta",flag:"🌎"},
+      {fr:"Sicaire des sables d'Afrique",sci:"Sicarius hahni",flag:"🌍"},
+      {fr:"Sicaire à 6 yeux",sci:"Sicarius thomisoides",flag:"🌎"},
+    ]
+  },
+  {
+    id:"pholcidae", name:"Pholcidae", common:"Araignées longues pattes / Caves",
+    icon:"🦵", ordre:"Araneomorphae",
+    especes:1834, genres:96,
+    taille:"micro", taille_mm:"2–10 mm (corps)", danger:1,
+    continents:["cosmopolite"], toile:"cobweb",
+    habitat:["maison","grotte","tropical"],
+    regime:["insectes","araignees"],
+    description:"Pattes très longues (8–10× le corps). Vibrent intensément si menacées. Mangent parfois d'autres araignées. Communes dans les maisons.",
+    tags:[{l:"Inoffensives",c:"safe"},{l:"Aranéophages",c:"neutral"},{l:"Maisons/Grottes",c:"info"}],
+    species:[
+      {fr:"Araignée longues pattes des caves",sci:"Pholcus phalangioides",flag:"🌍"},
+      {fr:"Pholque à marbrures",sci:"Holocnemus pluchei",flag:"🇪🇺"},
+      {fr:"Pholque de Lyon",sci:"Crossopriza lyoni",flag:"🌏"},
+      {fr:"Pholque méditerranéen",sci:"Pholcus opilionoides",flag:"🇪🇺"},
+      {fr:"Artema atlanta",sci:"Artema atlanta",flag:"🌍"},
+    ]
+  },
+  {
+    id:"pisauridae", name:"Pisauridae", common:"Pisaures / Dolomèdes",
+    icon:"🌊", ordre:"Araneomorphae",
+    especes:347, genres:52,
+    taille:"moyen", taille_mm:"10–30 mm", danger:1,
+    continents:["europe","asie","afrique","amerique_nord"], toile:"pas_de_toile",
+    habitat:["aquatique","foret","prairie"],
+    regime:["insectes","aquatique_proies"],
+    description:"Certaines chassent sur l'eau (Dolomèdes). Les femelles portent leur cocon. Le mâle offre de la nourriture lors de la parade.",
+    tags:[{l:"Semi-aquatiques",c:"info"},{l:"Inoffensives",c:"safe"},{l:"Cocon porté",c:"neutral"}],
+    species:[
+      {fr:"Pisaure admirable",sci:"Pisaura mirabilis",flag:"🇪🇺"},
+      {fr:"Dolomède des marais",sci:"Dolomedes fimbriatus",flag:"🇪🇺"},
+      {fr:"Dolomède des étangs",sci:"Dolomedes plantarius",flag:"🇪🇺"},
+      {fr:"Dolomède géant",sci:"Dolomedes tenebrosus",flag:"🇺🇸"},
+      {fr:"Dolomède pêcheur",sci:"Dolomedes triton",flag:"🇺🇸"},
+      {fr:"Tetragnophthalma",sci:"Tetragonophthalma affinis",flag:"🌍"},
+    ]
+  },
+  {
+    id:"nephilidae", name:"Nephilidae", common:"Araignées dorées / Néphiles",
+    icon:"✨", ordre:"Araneomorphae",
+    especes:68, genres:6,
+    taille:"grand", taille_mm:"20–50 mm (femelle)", danger:1,
+    continents:["afrique","asie","oceanie","amerique_sud"], toile:"orbitele",
+    habitat:["tropical","foret"],
+    regime:["insectes","vertébrés"],
+    description:"Soie dorée parmi les plus résistantes du monde naturel. Dimorphisme sexuel extrême (femelle très grande). Toiles persistantes.",
+    tags:[{l:"Soie dorée",c:"warn"},{l:"Inoffensives",c:"safe"},{l:"Dimorphisme extrême",c:"neutral"}],
+    species:[
+      {fr:"Néphile géante",sci:"Nephila pilipes",flag:"🌏"},
+      {fr:"Araignée de soie dorée",sci:"Trichonephila clavipes",flag:"🌎"},
+      {fr:"Néphile comestible d'Australie",sci:"Trichonephila edulis",flag:"🇦🇺"},
+      {fr:"Nephila senegalensis",sci:"Nephila senegalensis",flag:"🌍"},
+      {fr:"Néphile de Madagascar",sci:"Nephila inaurata",flag:"🌍"},
+      {fr:"Néphilingis cruentata",sci:"Nephilingis cruentata",flag:"🌍"},
+    ]
+  },
+  {
+    id:"sparassidae", name:"Sparassidae", common:"Araignées chasseuses géantes",
+    icon:"🏃", ordre:"Araneomorphae",
+    especes:1316, genres:90,
+    taille:"grand", taille_mm:"20–60 mm", danger:2,
+    continents:["asie","oceanie","afrique","amerique_sud"], toile:"pas_de_toile",
+    habitat:["tropical","foret","maison"],
+    regime:["insectes","vertébrés"],
+    description:"Pattes en extension latérale caractéristique. Très rapides. Souvent introduites dans les maisons dans des fruits tropicaux.",
+    tags:[{l:"Chasseuses géantes",c:"info"},{l:"Rapides",c:"neutral"},{l:"Faible danger",c:"warn"}],
+    species:[
+      {fr:"Hétéropode chasseur",sci:"Heteropoda venatoria",flag:"🌏"},
+      {fr:"Araignée sociale d'Australie",sci:"Delena cancerides",flag:"🇦🇺"},
+      {fr:"Araignée châtaigne d'Afrique",sci:"Palystes castaneus",flag:"🌍"},
+      {fr:"Olios géant",sci:"Olios giganteus",flag:"🇺🇸"},
+      {fr:"Chaetopelma olivaceum",sci:"Chaetopelma olivaceum",flag:"🌍"},
+      {fr:"Pandercetes gracilis",sci:"Pandercetes gracilis",flag:"🌏"},
+    ]
+  },
+  {
+    id:"ctenidae", name:"Ctenidae", common:"Araignées vagabondes / Araignées banane",
+    icon:"🍌", ordre:"Araneomorphae",
+    especes:541, genres:48,
+    taille:"grand", taille_mm:"25–50 mm", danger:5,
+    continents:["amerique_sud","amerique_nord"], toile:"pas_de_toile",
+    habitat:["tropical","foret"],
+    regime:["insectes","vertébrés"],
+    description:"Les Phoneutria sont parmi les araignées les plus venimeuses au monde. Agressives, se cachent dans les bananes exportées.",
+    tags:[{l:"Extrêmement dangereuses",c:"danger"},{l:"Amérique du Sud",c:"warn"},{l:"Venin puissant",c:"danger"}],
+    species:[
+      {fr:"Araignée banane (Phoneutrie sauvage)",sci:"Phoneutria fera",flag:"🌎"},
+      {fr:"Araignée armée",sci:"Phoneutria nigriventer",flag:"🌎"},
+      {fr:"Phoneutrie de Key",sci:"Phoneutria keyserlingi",flag:"🌎"},
+      {fr:"Cténe robuste",sci:"Ctenus validus",flag:"🌎"},
+      {fr:"Viridasius fasciatus",sci:"Viridasius fasciatus",flag:"🌍"},
+    ]
+  },
+  {
+    id:"scytodidae", name:"Scytodidae", common:"Araignées crachantes",
+    icon:"💦", ordre:"Araneomorphae",
+    especes:236, genres:5,
+    taille:"petit", taille_mm:"3–10 mm", danger:1,
+    continents:["cosmopolite"], toile:"pas_de_toile",
+    habitat:["maison","tropical","grotte"],
+    regime:["insectes","araignees"],
+    description:"Crachent un venin gluant en zig-zag à 60 cm de distance pour immobiliser leurs proies. Céphalothorax bombé caractéristique.",
+    tags:[{l:"Crachantes",c:"info"},{l:"6 yeux",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Araignée crachante tachetée",sci:"Scytodes thoracica",flag:"🌍"},
+      {fr:"Araignée crachante globuleuse",sci:"Scytodes globula",flag:"🌎"},
+      {fr:"Scytodes des maisons",sci:"Scytodes longipes",flag:"🌍"},
+    ]
+  },
+  {
+    id:"dysderidae", name:"Dysderidae", common:"Araignées à 6 yeux / Araignées des cloportes",
+    icon:"🐛", ordre:"Araneomorphae",
+    especes:625, genres:28,
+    taille:"petit", taille_mm:"8–20 mm", danger:2,
+    continents:["europe","asie","afrique"], toile:"terrier",
+    habitat:["foret","prairie","grotte"],
+    regime:["insectes"],
+    description:"Chélicères massifs permettant de percer le test des cloportes. 6 yeux. Vivent sous les pierres et écorces. Actives surtout la nuit.",
+    tags:[{l:"6 yeux",c:"neutral"},{l:"Chélicères géants",c:"info"},{l:"Nocturnes",c:"neutral"}],
+    species:[
+      {fr:"Araignée des cloportes",sci:"Dysdera crocata",flag:"🇪🇺"},
+      {fr:"Harpactéa d'Homberg",sci:"Harpactea hombergi",flag:"🇪🇺"},
+      {fr:"Rhodopsis fuligineux",sci:"Rhodopsis fuliginea",flag:"🇪🇺"},
+      {fr:"Dysdera ninnii",sci:"Dysdera ninnii",flag:"🇪🇺"},
+      {fr:"Stalita taeniaria",sci:"Stalita taeniaria",flag:"🇪🇺"},
+    ]
+  },
+  {
+    id:"gnaphosidae", name:"Gnaphosidae", common:"Araignées plates / Gnaphoses",
+    icon:"🪲", ordre:"Araneomorphae",
+    especes:2470, genres:160,
+    taille:"petit", taille_mm:"4–15 mm", danger:2,
+    continents:["cosmopolite"], toile:"pas_de_toile",
+    habitat:["foret","prairie","desert"],
+    regime:["insectes"],
+    description:"Corps aplati pour se glisser sous les pierres et écorces. Filières postérieures cylindriques et écartées. Chasseuses nocturnes.",
+    tags:[{l:"Nocturnes",c:"info"},{l:"Terrestres",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Gnaphose des prairies",sci:"Gnaphosa muscorum",flag:"🇪🇺"},
+      {fr:"Drassode soyeux",sci:"Drassodes lapidosus",flag:"🇪🇺"},
+      {fr:"Zelotes rustique",sci:"Zelotes rusticus",flag:"🇪🇺"},
+      {fr:"Micaria pulicaria",sci:"Micaria pulicaria",flag:"🇪🇺"},
+      {fr:"Haplodrassus signifer",sci:"Haplodrassus signifer",flag:"🇪🇺"},
+      {fr:"Zelotes longipes",sci:"Zelotes longipes",flag:"🇪🇺"},
+    ]
+  },
+  {
+    id:"clubionidae", name:"Clubionidae", common:"Araignées sacculines",
+    icon:"🛏️", ordre:"Araneomorphae",
+    especes:621, genres:15,
+    taille:"petit", taille_mm:"4–12 mm", danger:1,
+    continents:["cosmopolite"], toile:"pas_de_toile",
+    habitat:["foret","prairie"],
+    regime:["insectes"],
+    description:"Construisent un sac de soie dans les feuilles roulées pour se reposer. Chasseuses nocturnes. Corps allongé.",
+    tags:[{l:"Sac de soie",c:"info"},{l:"Nocturnes",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Clubione fourmi",sci:"Clubiona compta",flag:"🇪🇺"},
+      {fr:"Clubione des roseaux",sci:"Clubiona phragmitis",flag:"🇪🇺"},
+      {fr:"Clubione terrestre",sci:"Clubiona terrestris",flag:"🇪🇺"},
+      {fr:"Cheiracanthium morsitans",sci:"Cheiracanthium morsitans",flag:"🇪🇺"},
+    ]
+  },
+  {
+    id:"tetragnathidae", name:"Tetragnathidae", common:"Araignées longues mâchoires",
+    icon:"🎣", ordre:"Araneomorphae",
+    especes:986, genres:26,
+    taille:"moyen", taille_mm:"7–25 mm", danger:1,
+    continents:["cosmopolite"], toile:"orbitele",
+    habitat:["aquatique","foret"],
+    regime:["insectes","aquatique_proies"],
+    description:"Chélicères très allongés avec crochets impressionnants. Toiles orbitèles inclinées. Fréquentent les zones humides et cours d'eau.",
+    tags:[{l:"Zones humides",c:"info"},{l:"Chélicères géants",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Tétragnath allongé",sci:"Tetragnatha extensa",flag:"🇪🇺"},
+      {fr:"Tétragnath de montagne",sci:"Tetragnatha montana",flag:"🇪🇺"},
+      {fr:"Pachygnath de Degeer",sci:"Pachygnatha degeeri",flag:"🇪🇺"},
+      {fr:"Meta des grottes",sci:"Meta menardi",flag:"🇪🇺"},
+      {fr:"Meta bourneti",sci:"Meta bourneti",flag:"🇪🇺"},
+    ]
+  },
+  {
+    id:"uloboridae", name:"Uloboridae", common:"Araignées sans venin / Cribellatae",
+    icon:"🕸️", ordre:"Araneomorphae",
+    especes:275, genres:19,
+    taille:"micro", taille_mm:"2–8 mm", danger:1,
+    continents:["cosmopolite"], toile:"orbitele",
+    habitat:["foret","prairie","tropical"],
+    regime:["insectes"],
+    description:"Seule grande famille d'araignées entièrement dépourvue de glandes à venin. Utilisent un cribelum pour produire une soie peignée.",
+    tags:[{l:"Sans venin",c:"safe"},{l:"Soie cribelée",c:"info"},{l:"Uniqueue",c:"neutral"}],
+    species:[
+      {fr:"Ulobore à pattes emplumées",sci:"Uloborus plumipes",flag:"🌍"},
+      {fr:"Araignée triangle",sci:"Hyptiotes paradoxus",flag:"🇪🇺"},
+      {fr:"Octonobe de Chine",sci:"Octonoba sinensis",flag:"🌏"},
+      {fr:"Ulobore walckenaerien",sci:"Uloborus walckenaerius",flag:"🇪🇺"},
+    ]
+  },
+  {
+    id:"mimetidae", name:"Mimetidae", common:"Araignées pirates",
+    icon:"🌊", ordre:"Araneomorphae",
+    especes:165, genres:12,
+    taille:"micro", taille_mm:"2–7 mm", danger:1,
+    continents:["cosmopolite"], toile:"pas_de_toile",
+    habitat:["foret","prairie"],
+    regime:["araignees"],
+    description:"Spécialistes de la prédation sur d'autres araignées. Imitent les vibrations de proies dans les toiles. Macrochelicères épineux caractéristiques.",
+    tags:[{l:"Aranéophages",c:"info"},{l:"Pirates",c:"warn"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Mimète lisse",sci:"Mimetus laevigatus",flag:"🇪🇺"},
+      {fr:"Ero fourchu (araignée pirate)",sci:"Ero furcata",flag:"🇪🇺"},
+      {fr:"Ero aphana",sci:"Ero aphana",flag:"🇪🇺"},
+    ]
+  },
+  {
+    id:"zoropsidae", name:"Zoropsidae", common:"Fausses araignées-loups",
+    icon:"🐾", ordre:"Araneomorphae",
+    especes:178, genres:28,
+    taille:"moyen", taille_mm:"10–25 mm", danger:2,
+    continents:["europe","afrique","asie","amerique_sud"], toile:"entonnoir",
+    habitat:["maison","foret"],
+    regime:["insectes"],
+    description:"Ressemblent aux araignées-loups mais possèdent un cribelum. Envahissantes en Europe du Sud. Souvent confondues avec les tégénaires.",
+    tags:[{l:"Envahissantes",c:"warn"},{l:"Cribellatae",c:"info"},{l:"Faible danger",c:"warn"}],
+    species:[
+      {fr:"Zoropsie rayée",sci:"Zoropsis spinimana",flag:"🇪🇺"},
+      {fr:"Zoropsie méditerranéenne",sci:"Zoropsis media",flag:"🇪🇺"},
+      {fr:"Griswoldia acaenata",sci:"Griswoldia acaenata",flag:"🌍"},
+    ]
+  },
+  {
+    id:"dictynidae", name:"Dictynidae", common:"Araignées dictynides",
+    icon:"🌿", ordre:"Araneomorphae",
+    especes:594, genres:56,
+    taille:"micro", taille_mm:"1–5 mm", danger:1,
+    continents:["cosmopolite"], toile:"cobweb",
+    habitat:["foret","prairie"],
+    regime:["insectes"],
+    description:"Très petites araignées construisant des toiles irrégulières sur les végétaux. Cribelum présent. Peu connues.",
+    tags:[{l:"Micro",c:"neutral"},{l:"Végétaux",c:"info"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Dictyne commune",sci:"Dictyna arundinacea",flag:"🇪🇺"},
+      {fr:"Dictyne des murs",sci:"Dictyna uncinata",flag:"🇪🇺"},
+      {fr:"Dictyne de Murray",sci:"Dictyna muraria",flag:"🇪🇺"},
+    ]
+  },
+  {
+    id:"amaurobiidae", name:"Amaurobiidae", common:"Araignées amaurobiides",
+    icon:"🪵", ordre:"Araneomorphae",
+    especes:274, genres:49,
+    taille:"moyen", taille_mm:"8–18 mm", danger:1,
+    continents:["europe","asie","amerique_nord"], toile:"entonnoir",
+    habitat:["foret","maison"],
+    regime:["insectes"],
+    description:"Toiles à fils bleutés caractéristiques (soie cribelée). Vivent sous les écorces et pierres. Filières postérieures longues.",
+    tags:[{l:"Soie bleutée",c:"info"},{l:"Inoffensives",c:"safe"},{l:"Europe",c:"neutral"}],
+    species:[
+      {fr:"Amaurobius féroce",sci:"Amaurobius ferox",flag:"🇪🇺"},
+      {fr:"Amaurobius des murs",sci:"Amaurobius similis",flag:"🇪🇺"},
+      {fr:"Amaurobius des forêts",sci:"Amaurobius fenestralis",flag:"🇪🇺"},
+    ]
+  },
+  {
+    id:"oecobiidae", name:"Oecobiidae", common:"Araignées étoilées",
+    icon:"⭐", ordre:"Araneomorphae",
+    especes:113, genres:6,
+    taille:"micro", taille_mm:"1–4 mm", danger:1,
+    continents:["cosmopolite"], toile:"cobweb",
+    habitat:["maison","prairie"],
+    regime:["insectes"],
+    description:"Minuscules araignées construisant de petites toiles étoilées plates sur surfaces lisses (murs, rochers). Abdomen circulaire.",
+    tags:[{l:"Micro",c:"neutral"},{l:"Toile étoilée",c:"info"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Oécobe des maisons",sci:"Oecobius navus",flag:"🌍"},
+      {fr:"Oécobe des murs",sci:"Oecobius maculatus",flag:"🌍"},
+    ]
+  },
+  {
+    id:"segestriidae", name:"Segestriidae", common:"Araignées tubicolaires / Ségestries",
+    icon:"🔫", ordre:"Araneomorphae",
+    especes:131, genres:3,
+    taille:"moyen", taille_mm:"8–22 mm", danger:2,
+    continents:["europe","afrique","asie","amerique_nord"], toile:"terrier",
+    habitat:["maison","foret","grotte"],
+    regime:["insectes"],
+    description:"6 yeux. Tube de soie dans les crevasses avec fils radiaux tendus comme des rayons. 3 paires de pattes dirigées vers l'avant.",
+    tags:[{l:"Tube + fils radiaux",c:"info"},{l:"6 yeux",c:"neutral"},{l:"Faible danger",c:"warn"}],
+    species:[
+      {fr:"Ségestrie florentine",sci:"Segestria florentina",flag:"🇪🇺"},
+      {fr:"Ségestrie des maisons",sci:"Segestria senoculata",flag:"🇪🇺"},
+      {fr:"Ariadna lateralis",sci:"Ariadna lateralis",flag:"🇺🇸"},
+    ]
+  },
+  {
+    id:"miturgidae", name:"Miturgidae", common:"Araignées miturgides",
+    icon:"🌙", ordre:"Araneomorphae",
+    especes:163, genres:28,
+    taille:"moyen", taille_mm:"6–20 mm", danger:3,
+    continents:["amerique_nord","amerique_sud","oceanie"], toile:"pas_de_toile",
+    habitat:["desert","foret"],
+    regime:["insectes"],
+    description:"Inclut les araignées à dos jaune australiennes, responsables de nombreuses morsures avec douleur intense. Chasseuses nocturnes.",
+    tags:[{l:"Danger modéré",c:"warn"},{l:"Nocturnes",c:"neutral"},{l:"Australie",c:"info"}],
+    species:[
+      {fr:"Araignée à dos jaune",sci:"Cheiracanthium inclusum",flag:"🇦🇺"},
+      {fr:"Miturgide américain",sci:"Trachelas tranquillus",flag:"🇺🇸"},
+      {fr:"Cheiracanthium punctorium",sci:"Cheiracanthium punctorium",flag:"🇪🇺"},
+    ]
+  },
+  {
+    id:"dipluridae", name:"Dipluridae", common:"Mygales à toile en entonnoir",
+    icon:"🕳️", ordre:"Mygalomorphae",
+    especes:188, genres:26,
+    taille:"grand", taille_mm:"15–40 mm", danger:2,
+    continents:["amerique_sud","oceanie","asie"], toile:"entonnoir",
+    habitat:["foret","tropical"],
+    regime:["insectes"],
+    description:"Mygales construisant des toiles en entonnoir ou tube. Filières postérieures très longues et visibles. Abdomen allongé.",
+    tags:[{l:"Mygalomorphes",c:"info"},{l:"Toile en tube",c:"neutral"},{l:"Faible danger",c:"warn"}],
+    species:[
+      {fr:"Mégahexure de Copland",sci:"Megahexura fulva",flag:"🇺🇸"},
+      {fr:"Atraxe de Kennel",sci:"Atracosmus kennelii",flag:"🌎"},
+      {fr:"Dipluride géant",sci:"Euagrus chisoseus",flag:"🇺🇸"},
+    ]
+  },
+  {
+    id:"nemesiidae", name:"Nemesiidae", common:"Mygales nemesiides",
+    icon:"🌑", ordre:"Mygalomorphae",
+    especes:380, genres:49,
+    taille:"grand", taille_mm:"15–45 mm", danger:2,
+    continents:["europe","afrique","asie","amerique_sud","oceanie"], toile:"terrier",
+    habitat:["desert","foret","prairie"],
+    regime:["insectes"],
+    description:"Mygales de taille intermédiaire construisant des terriers. Certaines espèces méditerranéennes (Nemesia). Proches des théraphosidés.",
+    tags:[{l:"Mygalomorphes",c:"info"},{l:"Terricoles",c:"neutral"},{l:"Faible danger",c:"warn"}],
+    species:[
+      {fr:"Némésia arboricole",sci:"Nemesia arboricola",flag:"🇪🇺"},
+      {fr:"Nemesia caementaria",sci:"Nemesia caementaria",flag:"🇪🇺"},
+      {fr:"Acanthogonatus pauper",sci:"Acanthogonatus pauper",flag:"🌎"},
+      {fr:"Aname mainae",sci:"Aname mainae",flag:"🇦🇺"},
+    ]
+  },
+  {
+    id:"hexathelidae", name:"Hexathelidae", common:"Mygales hexathélides",
+    icon:"🕳️", ordre:"Mygalomorphae",
+    especes:50, genres:11,
+    taille:"moyen", taille_mm:"12–30 mm", danger:3,
+    continents:["oceanie","asie","amerique_sud"], toile:"terrier",
+    habitat:["foret","tropical"],
+    regime:["insectes"],
+    description:"Famille proche des Atracidae. Comprend des espèces venimeuses d'Australie. Toiles en entonnoir dans terriers.",
+    tags:[{l:"Mygalomorphes",c:"info"},{l:"Venimeuses",c:"warn"},{l:"Australie/Asie",c:"neutral"}],
+    species:[
+      {fr:"Hexathèle de Hochstetter",sci:"Hexathele hochstetteri",flag:"🇳🇿"},
+      {fr:"Paratheuma insulare",sci:"Paratheuma insulare",flag:"🇺🇸"},
+    ]
+  },
+  {
+    id:"ctenizidae", name:"Ctenizidae", common:"Araignées trappe",
+    icon:"🚪", ordre:"Mygalomorphae",
+    especes:145, genres:9,
+    taille:"moyen", taille_mm:"10–30 mm", danger:1,
+    continents:["europe","afrique","asie","oceanie"], toile:"terrier",
+    habitat:["foret","desert","prairie"],
+    regime:["insectes"],
+    description:"Construisent des terriers fermés par une trappe en liège et soie parfaitement camouflée. Attendent les proies à l'affût derrière la trappe.",
+    tags:[{l:"Araignée trappe",c:"info"},{l:"Mygalomorphes",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Ctenize de Sauvage",sci:"Cteniza sauvagesi",flag:"🇪🇺"},
+      {fr:"Cyclocosmia torreya",sci:"Cyclocosmia torreya",flag:"🇺🇸"},
+      {fr:"Ummidia aedificatoria",sci:"Ummidia aedificatoria",flag:"🌎"},
+      {fr:"Nemesia barbara",sci:"Nemesia barbara",flag:"🌍"},
+    ]
+  },
+  {
+    id:"actinopodidae", name:"Actinopodidae", common:"Araignées trappe d'Australie",
+    icon:"🚪", ordre:"Mygalomorphae",
+    especes:52, genres:3,
+    taille:"moyen", taille_mm:"15–35 mm", danger:3,
+    continents:["oceanie","amerique_sud"], toile:"terrier",
+    habitat:["foret","prairie"],
+    regime:["insectes"],
+    description:"Incluent les araignées à trappe à pattes rouges d'Australie. Morsures douloureuses pouvant provoquer douleurs sévères.",
+    tags:[{l:"Araignée trappe",c:"info"},{l:"Danger modéré",c:"warn"},{l:"Australie",c:"neutral"}],
+    species:[
+      {fr:"Araignée trappe pattes rouges",sci:"Actinopus tarsalis",flag:"🇦🇺"},
+      {fr:"Missulena bradleyi",sci:"Missulena bradleyi",flag:"🇦🇺"},
+      {fr:"Missulena occatoria",sci:"Missulena occatoria",flag:"🇦🇺"},
+    ]
+  },
+  {
+    id:"zodariidae", name:"Zodariidae", common:"Araignées zodariides",
+    icon:"🐜", ordre:"Araneomorphae",
+    especes:1180, genres:91,
+    taille:"petit", taille_mm:"3–12 mm", danger:1,
+    continents:["afrique","asie","oceanie","europe"], toile:"pas_de_toile",
+    habitat:["desert","prairie"],
+    regime:["insectes"],
+    description:"Chasseuses spécialisées souvent en milieux ouverts. Certaines espèces sont myrmécophages (mangent des fourmis).",
+    tags:[{l:"Myrmécophages",c:"info"},{l:"Zones arides",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Zodarion italicum",sci:"Zodarion italicum",flag:"🇪🇺"},
+      {fr:"Zodarion germanicum",flag:"🇪🇺",sci:"Zodarion germanicum"},
+      {fr:"Asceua laurifolia",sci:"Asceua laurifolia",flag:"🌏"},
+    ]
+  },
+  {
+    id:"oxyopidae", name:"Oxyopidae", common:"Araignées-lynx",
+    icon:"🦁", ordre:"Araneomorphae",
+    especes:490, genres:9,
+    taille:"petit", taille_mm:"5–18 mm", danger:1,
+    continents:["cosmopolite"], toile:"pas_de_toile",
+    habitat:["prairie","foret","tropical"],
+    regime:["insectes"],
+    description:"Araignées agiles aux yeux en hexagone caractéristique. Pattes couvertes d'épines. Sautent pour capturer les insectes en vol.",
+    tags:[{l:"Lynx-sauteuses",c:"info"},{l:"Prairies",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Araignée-lynx rayée",sci:"Oxyopes lineatus",flag:"🇪🇺"},
+      {fr:"Araignée-lynx verte",sci:"Peucetia viridans",flag:"🇺🇸"},
+      {fr:"Oxyopes hirtus",sci:"Oxyopes hirtus",flag:"🇪🇺"},
+      {fr:"Peucetia madagascariensis",sci:"Peucetia madagascariensis",flag:"🌍"},
+    ]
+  },
+  {
+    id:"liocranidae", name:"Liocranidae", common:"Araignées liocranides",
+    icon:"🍂", ordre:"Araneomorphae",
+    especes:266, genres:34,
+    taille:"petit", taille_mm:"4–12 mm", danger:1,
+    continents:["europe","asie","afrique"], toile:"pas_de_toile",
+    habitat:["foret","prairie"],
+    regime:["insectes"],
+    description:"Araignées terrestres nocturnes vivant sous les feuilles mortes et pierres. Pattes épineuses. Peu étudiées.",
+    tags:[{l:"Nocturnes",c:"neutral"},{l:"Feuilles mortes",c:"info"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Liocranides de Risso",sci:"Agroeca brunnea",flag:"🇪🇺"},
+      {fr:"Liocranum rupicola",sci:"Liocranum rupicola",flag:"🇪🇺"},
+      {fr:"Scotina gracilipes",sci:"Scotina gracilipes",flag:"🇪🇺"},
+    ]
+  },
+  {
+    id:"philodromidae", name:"Philodromidae", common:"Araignées coureuses",
+    icon:"🏃", ordre:"Araneomorphae",
+    especes:545, genres:30,
+    taille:"petit", taille_mm:"4–14 mm", danger:1,
+    continents:["cosmopolite"], toile:"pas_de_toile",
+    habitat:["foret","prairie"],
+    regime:["insectes"],
+    description:"Similaires aux araignées crabes mais pattes plus symétriques. Très rapides sur les végétaux et surfaces planes. Corps aplati.",
+    tags:[{l:"Coureuses rapides",c:"info"},{l:"Végétaux",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Philodrome déprîmé",sci:"Philodromus dispar",flag:"🇪🇺"},
+      {fr:"Philodrome des cimes",sci:"Philodromus cespitum",flag:"🇪🇺"},
+      {fr:"Tibellus oblongus",sci:"Tibellus oblongus",flag:"🇪🇺"},
+    ]
+  },
+  {
+    id:"lamponidae", name:"Lamponidae", common:"Araignées blanches à queue",
+    icon:"🤍", ordre:"Araneomorphae",
+    especes:198, genres:23,
+    taille:"petit", taille_mm:"5–18 mm", danger:3,
+    continents:["oceanie"], toile:"pas_de_toile",
+    habitat:["maison","foret"],
+    regime:["insectes","araignees"],
+    description:"Araignées australiennes souvent trouvées dans les maisons. Venin cytotoxique pouvant causer nécrose locale. Chasse les autres araignées.",
+    tags:[{l:"Danger modéré",c:"warn"},{l:"Australie",c:"neutral"},{l:"Maisons",c:"info"}],
+    species:[
+      {fr:"Araignée blanche à queue",sci:"Lampona cylindrata",flag:"🇦🇺"},
+      {fr:"Lampona murina",sci:"Lampona murina",flag:"🇦🇺"},
+    ]
+  },
+  {
+    id:"eresidae", name:"Eresidae", common:"Araignées velours / Éresides",
+    icon:"🟥", ordre:"Araneomorphae",
+    especes:113, genres:10,
+    taille:"moyen", taille_mm:"6–20 mm", danger:1,
+    continents:["europe","afrique","asie"], toile:"terrier",
+    habitat:["desert","prairie"],
+    regime:["insectes"],
+    description:"Toile en tube avec nappe plate. Corps recouvert de poils denses donnant une apparence veloutée. La femelle nourrit ses petits avec son corps (matriphagie).",
+    tags:[{l:"Matriphagie",c:"warn"},{l:"Corps velouté",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Éresius rouge",sci:"Eresus cinnaberinus",flag:"🇪🇺"},
+      {fr:"Éresius de Kollár",sci:"Eresus kollari",flag:"🇪🇺"},
+      {fr:"Stegodyphus sarasinorum",sci:"Stegodyphus sarasinorum",flag:"🌏"},
+      {fr:"Stegodyphus social",sci:"Stegodyphus dumicola",flag:"🌍"},
+    ]
+  },
+  {
+    id:"hersiliidae", name:"Hersiliidae", common:"Araignées à queue longue",
+    icon:"⚡", ordre:"Araneomorphae",
+    especes:183, genres:17,
+    taille:"moyen", taille_mm:"8–20 mm", danger:1,
+    continents:["afrique","asie","amerique_sud","oceanie"], toile:"pas_de_toile",
+    habitat:["foret","tropical"],
+    regime:["insectes"],
+    description:"Filières postérieures extrêmement longues (aussi longues que l'abdomen). Courent en cercle autour de leur proie pour l'enrouler de soie.",
+    tags:[{l:"Filières géantes",c:"info"},{l:"Tropicales",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Hersilia savignyi",sci:"Hersilia savignyi",flag:"🌍"},
+      {fr:"Hersilia africana",sci:"Hersilia africana",flag:"🌍"},
+      {fr:"Tamopsis fickerti",sci:"Tamopsis fickerti",flag:"🇦🇺"},
+    ]
+  },
+  {
+    id:"telemidae", name:"Telemidae", common:"Araignées des grottes",
+    icon:"🦇", ordre:"Araneomorphae",
+    especes:56, genres:11,
+    taille:"micro", taille_mm:"1–3 mm", danger:1,
+    continents:["europe","asie","afrique"], toile:"pas_de_toile",
+    habitat:["grotte"],
+    regime:["insectes"],
+    description:"Araignées troglobies (exclusivement cavernicoles). Sans yeux ou avec yeux rudimentaires. Corps dépigmenté. Pattes très longues.",
+    tags:[{l:"Cavernicoles",c:"info"},{l:"Sans yeux",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Telema tenella",sci:"Telema tenella",flag:"🌏"},
+      {fr:"Canariellum crassum",sci:"Canariellum crassum",flag:"🇪🇺"},
+    ]
+  },
+  {
+    id:"argyronetidae", name:"Argyronetidae", common:"Araignée aquatique",
+    icon:"💧", ordre:"Araneomorphae",
+    especes:1, genres:1,
+    taille:"moyen", taille_mm:"8–18 mm", danger:2,
+    continents:["europe","asie"], toile:"aquatique",
+    habitat:["aquatique"],
+    regime:["aquatique_proies","insectes"],
+    description:"Seule araignée vivant entièrement sous l'eau. Construit une cloche à air ancrée aux plantes aquatiques. Respire l'air capturé sur son abdomen.",
+    tags:[{l:"Aquatique unique",c:"info"},{l:"Cloche d'air",c:"neutral"},{l:"Europe/Asie",c:"warn"}],
+    species:[
+      {fr:"Araignée aquatique",sci:"Argyroneta aquatica",flag:"🇪🇺"},
+    ]
+  },
+  {
+    id:"desidae", name:"Desidae", common:"Araignées desides",
+    icon:"🐚", ordre:"Araneomorphae",
+    especes:471, genres:63,
+    taille:"petit", taille_mm:"4–14 mm", danger:2,
+    continents:["oceanie","asie","amerique_sud"], toile:"cobweb",
+    habitat:["maison","foret","aquatique"],
+    regime:["insectes"],
+    description:"Famille riche et diversifiée d'Océanie et Asie. Certaines espèces vivent dans les zones intertidales et peuvent survivre sous l'eau plusieurs heures.",
+    tags:[{l:"Intertidales",c:"info"},{l:"Océanie",c:"neutral"},{l:"Faible danger",c:"warn"}],
+    species:[
+      {fr:"Desis marina",sci:"Desis marina",flag:"🇦🇺"},
+      {fr:"Badumna insignis",sci:"Badumna insignis",flag:"🇦🇺"},
+      {fr:"Badumna longinqua",sci:"Badumna longinqua",flag:"🇦🇺"},
+    ]
+  },
+  {
+    id:"filistatidae", name:"Filistatidae", common:"Araignées cribellates à toile",
+    icon:"🌑", ordre:"Araneomorphae",
+    especes:142, genres:19,
+    taille:"petit", taille_mm:"4–12 mm", danger:1,
+    continents:["europe","asie","afrique","amerique_nord"], toile:"terrier",
+    habitat:["maison","desert"],
+    regime:["insectes"],
+    description:"Araignées nocturnes à 8 yeux groupés. Toiles tubulaires avec fils radiaux cribellés divergeant d'un centre. Communes dans les maisons méditerranéennes.",
+    tags:[{l:"Méditerranéennes",c:"info"},{l:"Nocturnes",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Filistata insidiatrix",sci:"Filistata insidiatrix",flag:"🇪🇺"},
+      {fr:"Kukulcania hibernalis",sci:"Kukulcania hibernalis",flag:"🇺🇸"},
+      {fr:"Pritha nana",sci:"Pritha nana",flag:"🌍"},
+    ]
+  },
+  {
+    id:"hypochilidae", name:"Hypochilidae", common:"Araignées lamellées (primitives)",
+    icon:"🦕", ordre:"Hypochilomorphae",
+    especes:12, genres:2,
+    taille:"moyen", taille_mm:"10–20 mm", danger:1,
+    continents:["amerique_nord","asie"], toile:"cobweb",
+    habitat:["grotte","foret"],
+    regime:["insectes"],
+    description:"Famille très primitive. Forme intermédiaire entre Mygalomorphes et Aranéomorphes. Deux paires de poumons-livres. Sous-ordre distinct.",
+    tags:[{l:"Primitives",c:"warn"},{l:"Rare",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Hypochile thordeni",sci:"Hypochilus thordeni",flag:"🇺🇸"},
+      {fr:"Hypochile de Petrunkevitch",sci:"Hypochilus petrunkevitchi",flag:"🇺🇸"},
+      {fr:"Ectatosticta deltshevi",sci:"Ectatosticta davidi",flag:"🌏"},
+    ]
+  },
+  {
+    id:"synotaxidae", name:"Synotaxidae", common:"Araignées synotaxides",
+    icon:"🔬", ordre:"Araneomorphae",
+    especes:130, genres:9,
+    taille:"micro", taille_mm:"1–4 mm", danger:1,
+    continents:["amerique_sud","oceanie"], toile:"cobweb",
+    habitat:["foret","grotte"],
+    regime:["insectes"],
+    description:"Petite famille principalement néotropicale. 8 yeux en deux rangées. Toiles irrégulières dans les zones humides et caves.",
+    tags:[{l:"Amérique du Sud",c:"info"},{l:"Micro",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Synotaxus turbinatus",sci:"Synotaxus turbinatus",flag:"🌎"},
+      {fr:"Tekellina turgida",sci:"Tekellina turgida",flag:"🌎"},
+    ]
+  },
+  {
+    id:"mysmenidae", name:"Mysmenidae", common:"Araignées mysménides",
+    icon:"⚗️", ordre:"Araneomorphae",
+    especes:138, genres:13,
+    taille:"micro", taille_mm:"0.5–2 mm", danger:1,
+    continents:["cosmopolite"], toile:"orbitele",
+    habitat:["foret","grotte"],
+    regime:["insectes"],
+    description:"Parmi les plus petites araignées du monde. Certaines espèces mesurent moins de 1 mm. Construisent de minuscules toiles orbitèles.",
+    tags:[{l:"Infimes",c:"neutral"},{l:"Moins de 1 mm",c:"info"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Mysmenella jobi",sci:"Mysmenella jobi",flag:"🌎"},
+      {fr:"Trogloneta granulum",sci:"Trogloneta granulum",flag:"🇪🇺"},
+    ]
+  },
+  {
+    id:"leptonetidae", name:"Leptonetidae", common:"Araignées léptonétides",
+    icon:"👁️", ordre:"Araneomorphae",
+    especes:362, genres:32,
+    taille:"micro", taille_mm:"1–3 mm", danger:1,
+    continents:["europe","asie","amerique_nord"], toile:"pas_de_toile",
+    habitat:["grotte"],
+    regime:["insectes"],
+    description:"Araignées cavernicoles et endogées. Corps translucide. Yeux souvent réduits ou absents. Vivent dans les interstices du sol et grottes.",
+    tags:[{l:"Cavernicoles",c:"info"},{l:"Translucides",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Leptoneta infersa",sci:"Leptoneta infersa",flag:"🇪🇺"},
+      {fr:"Neoleptoneta myopica",sci:"Neoleptoneta myopica",flag:"🇺🇸"},
+      {fr:"Leptoneta convexa",sci:"Leptoneta convexa",flag:"🇪🇺"},
+      {fr:"Paraleptoneta sicula",sci:"Paraleptoneta sicula",flag:"🇪🇺"},
+    ]
+  },
+  {
+    id:"corinnidae", name:"Corinnidae", common:"Araignées corinnides / Fourmis-mimiques",
+    icon:"🐜", ordre:"Araneomorphae",
+    especes:780, genres:75,
+    taille:"petit", taille_mm:"3–14 mm", danger:2,
+    continents:["cosmopolite"], toile:"pas_de_toile",
+    habitat:["foret","prairie","tropical"],
+    regime:["insectes"],
+    description:"Nombreuses espèces mimant parfaitement les fourmis (myrmécomorphie) en forme et en comportement. Chasseuses diurnes rapides.",
+    tags:[{l:"Mimétisme fourmis",c:"info"},{l:"Chasseuses",c:"neutral"},{l:"Faible danger",c:"warn"}],
+    species:[
+      {fr:"Castianeira descripta",sci:"Castianeira descripta",flag:"🇺🇸"},
+      {fr:"Castianeira longipalpa",sci:"Castianeira longipalpa",flag:"🇺🇸"},
+      {fr:"Corinna crassa",sci:"Corinna crassa",flag:"🌍"},
+      {fr:"Trachelas tranquillus",sci:"Trachelas tranquillus",flag:"🇺🇸"},
+      {fr:"Meriola decepta",sci:"Meriola decepta",flag:"🇺🇸"},
+      {fr:"Nyssus coloripes",sci:"Nyssus coloripes",flag:"🇦🇺"},
+      {fr:"Poecilipta papua",sci:"Poecilipta papua",flag:"🌏"},
+      {fr:"Oleogaster raddei",sci:"Oleogaster raddei",flag:"🌍"},
+    ]
+  },
+  {
+    id:"cheiracanthiidae", name:"Cheiracanthiidae", common:"Araignées à sac jaune",
+    icon:"🟡", ordre:"Araneomorphae",
+    especes:320, genres:10,
+    taille:"petit", taille_mm:"5–15 mm", danger:3,
+    continents:["cosmopolite"], toile:"pas_de_toile",
+    habitat:["prairie","foret","maison"],
+    regime:["insectes"],
+    description:"Construisent un sac de soie pour se reposer. Morsures douloureuses pouvant causer nécrose légère chez certaines personnes.",
+    tags:[{l:"Sac de soie",c:"info"},{l:"Danger modéré",c:"warn"},{l:"Nocturnes",c:"neutral"}],
+    species:[
+      {fr:"Araignée à sac jaune",sci:"Cheiracanthium punctorium",flag:"🇪🇺"},
+      {fr:"Cheiracanthium inclusum",sci:"Cheiracanthium inclusum",flag:"🇺🇸"},
+      {fr:"Cheiracanthium mildei",sci:"Cheiracanthium mildei",flag:"🌍"},
+      {fr:"Cheiracanthium elegans",sci:"Cheiracanthium elegans",flag:"🇪🇺"},
+      {fr:"Cheiracanthium japonicum",sci:"Cheiracanthium japonicum",flag:"🌏"},
+      {fr:"Cheiracanthium erraticum",sci:"Cheiracanthium erraticum",flag:"🇪🇺"},
+    ]
+  },
+  {
+    id:"eutichuridae", name:"Eutichuridae", common:"Araignées eutichurides",
+    icon:"🌿", ordre:"Araneomorphae",
+    especes:377, genres:16,
+    taille:"petit", taille_mm:"4–18 mm", danger:2,
+    continents:["afrique","asie","amerique_sud","oceanie"], toile:"pas_de_toile",
+    habitat:["tropical","foret"],
+    regime:["insectes"],
+    description:"Famille tropicale chasseuse nocturne. Pattes antérieures plus longues. Souvent confondues avec les Clubionidae.",
+    tags:[{l:"Tropicales",c:"info"},{l:"Nocturnes",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Eutichurus africanus",sci:"Eutichurus africanus",flag:"🌍"},
+      {fr:"Calamoneta annulipes",sci:"Calamoneta annulipes",flag:"🌏"},
+      {fr:"Tecution minor",sci:"Tecution minor",flag:"🌏"},
+      {fr:"Sumampus fagei",sci:"Sumampus fagei",flag:"🌏"},
+    ]
+  },
+  {
+    id:"trachelidae", name:"Trachelidae", common:"Araignées trachelides",
+    icon:"🔴", ordre:"Araneomorphae",
+    especes:266, genres:18,
+    taille:"petit", taille_mm:"3–12 mm", danger:2,
+    continents:["cosmopolite"], toile:"pas_de_toile",
+    habitat:["foret","prairie","maison"],
+    regime:["insectes"],
+    description:"Anciennement incluses dans les Corinnidae. Abdomen souvent rouge vif. Chasseuses nocturnes sous les écorces.",
+    tags:[{l:"Abdomen rouge",c:"warn"},{l:"Nocturnes",c:"neutral"},{l:"Faible danger",c:"warn"}],
+    species:[
+      {fr:"Trachelas minor",sci:"Trachelas minor",flag:"🇺🇸"},
+      {fr:"Trachelas pacificus",sci:"Trachelas pacificus",flag:"🇺🇸"},
+      {fr:"Paratrachelas acuminus",sci:"Paratrachelas acuminus",flag:"🌏"},
+      {fr:"Cetonana laticeps",sci:"Cetonana laticeps",flag:"🇪🇺"},
+    ]
+  },
+  {
+    id:"anyphaenidae", name:"Anyphaenidae", common:"Araignées anyphaénides / Fantômes",
+    icon:"👻", ordre:"Araneomorphae",
+    especes:592, genres:57,
+    taille:"petit", taille_mm:"4–14 mm", danger:1,
+    continents:["amerique_nord","amerique_sud","asie"], toile:"pas_de_toile",
+    habitat:["foret","prairie","tropical"],
+    regime:["insectes"],
+    description:"Appelées 'ghost spiders' en anglais. Très rapides, chassent sur la végétation. Abdomen souvent translucide ou pâle.",
+    tags:[{l:"Araignées fantômes",c:"neutral"},{l:"Très rapides",c:"info"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Anyphaena accentuata",sci:"Anyphaena accentuata",flag:"🇪🇺"},
+      {fr:"Aysha gracilis",sci:"Aysha gracilis",flag:"🌎"},
+      {fr:"Hibana gracilis",sci:"Hibana gracilis",flag:"🇺🇸"},
+      {fr:"Wulfila saltabundus",sci:"Wulfila saltabundus",flag:"🌎"},
+      {fr:"Teudis flabellifer",sci:"Teudis flabellifer",flag:"🌎"},
+    ]
+  },
+  {
+    id:"penestomidae", name:"Penestomidae", common:"Araignées penestomides",
+    icon:"🌍", ordre:"Araneomorphae",
+    especes:17, genres:1,
+    taille:"moyen", taille_mm:"8–18 mm", danger:1,
+    continents:["afrique"], toile:"cobweb",
+    habitat:["foret","tropical"],
+    regime:["insectes"],
+    description:"Petite famille endémique d'Afrique subsaharienne. Mâles avec palpes très développés. Peu étudiée.",
+    tags:[{l:"Afrique uniquement",c:"neutral"},{l:"Rare",c:"info"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Penestomus planus",sci:"Penestomus planus",flag:"🌍"},
+      {fr:"Penestomus egazini",sci:"Penestomus egazini",flag:"🌍"},
+    ]
+  },
+  {
+    id:"prodidomidae", name:"Prodidomidae", common:"Araignées prodidomides",
+    icon:"🏜️", ordre:"Araneomorphae",
+    especes:309, genres:30,
+    taille:"petit", taille_mm:"3–10 mm", danger:1,
+    continents:["afrique","asie","oceanie","amerique_sud"], toile:"pas_de_toile",
+    habitat:["desert","prairie"],
+    regime:["insectes"],
+    description:"Araignées des milieux arides et semi-arides. Corps allongé, pattes longes. Actives la nuit, se cachent sous les pierres le jour.",
+    tags:[{l:"Zones arides",c:"info"},{l:"Nocturnes",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Prodidomus rufus",sci:"Prodidomus rufus",flag:"🌍"},
+      {fr:"Theuma natalensis",sci:"Theuma natalensis",flag:"🌍"},
+      {fr:"Lygromma chamberlini",sci:"Lygromma chamberlini",flag:"🇺🇸"},
+    ]
+  },
+  {
+    id:"selenopidae", name:"Selenopidae", common:"Araignées des fissures / Flatties",
+    icon:"🪨", ordre:"Araneomorphae",
+    especes:258, genres:9,
+    taille:"grand", taille_mm:"15–40 mm", danger:2,
+    continents:["afrique","asie","amerique_nord","amerique_sud","oceanie"], toile:"pas_de_toile",
+    habitat:["desert","foret","maison"],
+    regime:["insectes"],
+    description:"Corps extrêmement aplati pour se loger dans les fissures rocheuses. Vitesse de rotation parmi les plus rapides du règne animal (100ms).",
+    tags:[{l:"Corps ultra-plat",c:"info"},{l:"Ultra-rapides",c:"warn"},{l:"Fissures/rochers",c:"neutral"}],
+    species:[
+      {fr:"Selenops aissoni",sci:"Selenops aissoni",flag:"🌍"},
+      {fr:"Selenops mexicanus",sci:"Selenops mexicanus",flag:"🌎"},
+      {fr:"Selenops banksi",sci:"Selenops banksi",flag:"🌎"},
+      {fr:"Anyphops beavisi",sci:"Anyphops beavisi",flag:"🌍"},
+      {fr:"Siamspider chandrae",sci:"Siamspider chandrae",flag:"🌏"},
+    ]
+  },
+  {
+    id:"trochanteriidae", name:"Trochanteriidae", common:"Araignées trochantérides",
+    icon:"🪵", ordre:"Araneomorphae",
+    especes:186, genres:18,
+    taille:"moyen", taille_mm:"8–22 mm", danger:1,
+    continents:["afrique","asie","oceanie","amerique_sud"], toile:"pas_de_toile",
+    habitat:["foret","prairie"],
+    regime:["insectes"],
+    description:"Araignées aplaties sous les écorces. Pattes orientées latéralement comme les Selenopidae. Surtout Australie et Afrique.",
+    tags:[{l:"Sous les écorces",c:"neutral"},{l:"Corps aplati",c:"info"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Trochanteria petersi",sci:"Trochanteria petersi",flag:"🌍"},
+      {fr:"Platyoides walteri",sci:"Platyoides walteri",flag:"🌍"},
+      {fr:"Thaumasia velox",sci:"Thaumasia velox",flag:"🌎"},
+    ]
+  },
+  {
+    id:"toxopidae", name:"Toxopidae", common:"Araignées toxopides",
+    icon:"🌿", ordre:"Araneomorphae",
+    especes:118, genres:21,
+    taille:"micro", taille_mm:"2–7 mm", danger:1,
+    continents:["oceanie","asie"], toile:"cobweb",
+    habitat:["foret","prairie"],
+    regime:["insectes"],
+    description:"Petite famille principalement australasienne. Toiles irrégulières dans la végétation basse. Peu étudiée.",
+    tags:[{l:"Australasie",c:"info"},{l:"Micro",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Toxops elongatus",sci:"Toxops elongatus",flag:"🇦🇺"},
+      {fr:"Stenaelurillus lesserti",sci:"Stenaelurillus lesserti",flag:"🌏"},
+    ]
+  },
+  {
+    id:"stiphidiidae", name:"Stiphidiidae", common:"Araignées stiphidiides",
+    icon:"🕸️", ordre:"Araneomorphae",
+    especes:157, genres:18,
+    taille:"moyen", taille_mm:"8–20 mm", danger:1,
+    continents:["oceanie","asie"], toile:"nappe",
+    habitat:["foret","foret"],
+    regime:["insectes"],
+    description:"Famille australasienne construisant des toiles en nappe dans la forêt. Proches des Agelenidae. Peu dangereuses.",
+    tags:[{l:"Australasie",c:"info"},{l:"Toile en nappe",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Stiphidion facetum",sci:"Stiphidion facetum",flag:"🇦🇺"},
+      {fr:"Cambridgea foliata",sci:"Cambridgea foliata",flag:"🇳🇿"},
+      {fr:"Cambridgea rotundata",sci:"Cambridgea rotundata",flag:"🇳🇿"},
+    ]
+  },
+  {
+    id:"nicodamidae", name:"Nicodamidae", common:"Araignées nicodamides",
+    icon:"🌏", ordre:"Araneomorphae",
+    especes:24, genres:6,
+    taille:"micro", taille_mm:"2–5 mm", danger:1,
+    continents:["oceanie","asie"], toile:"cobweb",
+    habitat:["foret","tropical"],
+    regime:["insectes"],
+    description:"Petite famille relique d'Asie du Sud-Est et Australie. Araignées avec des pattes très longues relatives à leur corps. Intérêt phylogénétique.",
+    tags:[{l:"Relicte",c:"warn"},{l:"Rare",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Nicodamus peregrinus",sci:"Nicodamus peregrinus",flag:"🇦🇺"},
+      {fr:"Nicodamus mainae",sci:"Nicodamus mainae",flag:"🇦🇺"},
+    ]
+  },
+  {
+    id:"theridiosomatidae", name:"Theridiosomatidae", common:"Araignées à toile en dé",
+    icon:"🎲", ordre:"Araneomorphae",
+    especes:115, genres:19,
+    taille:"micro", taille_mm:"1–3 mm", danger:1,
+    continents:["cosmopolite"], toile:"orbitele",
+    habitat:["foret","aquatique"],
+    regime:["insectes"],
+    description:"Toile orbitèle en forme de cône ou dôme inversé. L'araignée tire un fil au centre pour tendre la toile comme un lance-pierre.",
+    tags:[{l:"Toile en cône",c:"info"},{l:"Micro",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Theridiosoma gemmosum",sci:"Theridiosoma gemmosum",flag:"🇪🇺"},
+      {fr:"Wendilgarda clara",sci:"Wendilgarda clara",flag:"🌎"},
+      {fr:"Epeirotypus brodiei",sci:"Epeirotypus brodiei",flag:"🌏"},
+    ]
+  },
+  {
+    id:"tetrablemmidae", name:"Tetrablemmidae", common:"Araignées tétrablemmides",
+    icon:"👁️", ordre:"Araneomorphae",
+    especes:176, genres:32,
+    taille:"micro", taille_mm:"1–4 mm", danger:1,
+    continents:["afrique","asie","amerique_sud","oceanie"], toile:"pas_de_toile",
+    habitat:["foret","grotte","tropical"],
+    regime:["insectes"],
+    description:"Minuscules araignées cuticule très dure. Certaines espèces avec yeux très réduits ou absents. Vivent dans les litières forestières.",
+    tags:[{l:"Micro",c:"neutral"},{l:"Litière forestière",c:"info"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Tetrablemma medioculatum",sci:"Tetrablemma medioculatum",flag:"🌏"},
+      {fr:"Brignoliella bimaculata",sci:"Brignoliella bimaculata",flag:"🌍"},
+    ]
+  },
+  {
+    id:"ochyroceratidae", name:"Ochyroceratidae", common:"Araignées des grottes tropicales",
+    icon:"🦇", ordre:"Araneomorphae",
+    especes:192, genres:19,
+    taille:"micro", taille_mm:"1–4 mm", danger:1,
+    continents:["afrique","asie","amerique_sud"], toile:"cobweb",
+    habitat:["grotte","tropical"],
+    regime:["insectes"],
+    description:"Araignées cavernicoles tropicales à pattes très longues. 6 ou 8 yeux. Toiles irrégulières dans les grottes humides.",
+    tags:[{l:"Cavernicoles",c:"info"},{l:"Tropiques",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Ochyrocera pakara",sci:"Ochyrocera pakara",flag:"🌎"},
+      {fr:"Speocera brignolii",sci:"Speocera brignolii",flag:"🌍"},
+    ]
+  },
+  {
+    id:"plectreuridae", name:"Plectreuridae", common:"Araignées plectreurides",
+    icon:"🌵", ordre:"Araneomorphae",
+    especes:32, genres:2,
+    taille:"moyen", taille_mm:"8–18 mm", danger:1,
+    continents:["amerique_nord","amerique_centrale"], toile:"cobweb",
+    habitat:["desert","prairie"],
+    regime:["insectes"],
+    description:"Famille des déserts d'Amérique du Nord. Corps robuste, pattes courtes. Venin puissant sur insectes mais inoffensif pour l'homme.",
+    tags:[{l:"Déserts Amérique",c:"info"},{l:"Rare",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Plectreurys tristis",sci:"Plectreurys tristis",flag:"🇺🇸"},
+      {fr:"Kibramoa madrona",sci:"Kibramoa madrona",flag:"🇺🇸"},
+    ]
+  },
+  {
+    id:"diguetidae", name:"Diguetidae", common:"Araignées diguétides",
+    icon:"🌵", ordre:"Araneomorphae",
+    especes:11, genres:2,
+    taille:"moyen", taille_mm:"10–20 mm", danger:1,
+    continents:["amerique_nord"], toile:"cobweb",
+    habitat:["desert"],
+    regime:["insectes"],
+    description:"Araignées des déserts du Sud-Ouest américain et Mexique. Construisent des toiles en tube dans les cactus. 6 yeux.",
+    tags:[{l:"Déserts USA/Mexique",c:"info"},{l:"6 yeux",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Diguetia canities",sci:"Diguetia canities",flag:"🇺🇸"},
+      {fr:"Diguetia imperiosa",sci:"Diguetia imperiosa",flag:"🌎"},
+    ]
+  },
+  {
+    id:"mysidae_spider", name:"Mygalomorphae incertae sedis", common:"Mygales non classifiées",
+    icon:"🕳️", ordre:"Mygalomorphae",
+    especes:95, genres:12,
+    taille:"grand", taille_mm:"20–50 mm", danger:2,
+    continents:["amerique_sud","afrique","asie"], toile:"terrier",
+    habitat:["tropical","foret"],
+    regime:["insectes"],
+    description:"Groupement provisoire de mygales dont la position taxonomique est encore en cours d'étude. Classification révisée régulièrement.",
+    tags:[{l:"Classification en cours",c:"warn"},{l:"Mygalomorphes",c:"info"},{l:"Faible danger",c:"warn"}],
+    species:[
+      {fr:"Entypesa melanogaster",sci:"Entypesa melanogaster",flag:"🌍"},
+      {fr:"Hermacha namaqua",sci:"Hermacha namaqua",flag:"🌍"},
+    ]
+  },
+  {
+    id:"migidae", name:"Migidae", common:"Araignées trappe à arbre",
+    icon:"🌳", ordre:"Mygalomorphae",
+    especes:100, genres:10,
+    taille:"moyen", taille_mm:"10–25 mm", danger:1,
+    continents:["afrique","oceanie","amerique_sud"], toile:"terrier",
+    habitat:["foret","tropical"],
+    regime:["insectes"],
+    description:"Construisent des terriers-trappes sur les troncs d'arbres plutôt qu'au sol. Couvercle camouflé en écorce. Afrique du Sud, Australie, Chili.",
+    tags:[{l:"Trappe sur arbres",c:"info"},{l:"Mygalomorphes",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Migas validus",sci:"Migas validus",flag:"🇳🇿"},
+      {fr:"Aganippe subtristis",sci:"Aganippe subtristis",flag:"🇦🇺"},
+      {fr:"Moggridgea tingle",sci:"Moggridgea tingle",flag:"🇦🇺"},
+      {fr:"Thyropoeus tibialis",sci:"Thyropoeus tibialis",flag:"🌍"},
+    ]
+  },
+  {
+    id:"barychelidae", name:"Barychelidae", common:"Mygales barychelides",
+    icon:"🌿", ordre:"Mygalomorphae",
+    especes:295, genres:44,
+    taille:"grand", taille_mm:"15–40 mm", danger:2,
+    continents:["oceanie","asie","afrique","amerique_sud"], toile:"terrier",
+    habitat:["tropical","foret"],
+    regime:["insectes"],
+    description:"Mygales avec rastellum (peigne de poils sur les chélicères) bien développé. Certaines espèces avec toison de poils urticants.",
+    tags:[{l:"Mygalomorphes",c:"info"},{l:"Rastellum",c:"neutral"},{l:"Faible danger",c:"warn"}],
+    species:[
+      {fr:"Barychelides armatus",sci:"Barychelides armatus",flag:"🇦🇺"},
+      {fr:"Sason robustum",sci:"Sason robustum",flag:"🌏"},
+      {fr:"Idioctis littoralis",sci:"Idioctis littoralis",flag:"🌏"},
+      {fr:"Trichopelma semiaurantiacum",sci:"Trichopelma semiaurantiacum",flag:"🌎"},
+    ]
+  },
+  {
+    id:"idiopidae", name:"Idiopidae", common:"Mygales idiopides",
+    icon:"🚪", ordre:"Mygalomorphae",
+    especes:382, genres:26,
+    taille:"moyen", taille_mm:"12–35 mm", danger:1,
+    continents:["afrique","oceanie","asie","amerique_sud"], toile:"terrier",
+    habitat:["desert","foret","prairie"],
+    regime:["insectes"],
+    description:"Mygales avec trappe similaires aux Ctenizidae. Corps souvent coloré. Très répandues en Australie et Afrique du Sud.",
+    tags:[{l:"Araignées trappe",c:"info"},{l:"Mygalomorphes",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Idiosoma nigrum",sci:"Idiosoma nigrum",flag:"🇦🇺"},
+      {fr:"Aganippe castellum",sci:"Aganippe castellum",flag:"🇦🇺"},
+      {fr:"Segregara rastellata",sci:"Segregara rastellata",flag:"🌍"},
+      {fr:"Galeosoma pedipalpe",sci:"Galeosoma pedipalpe",flag:"🌍"},
+      {fr:"Euoplos variabilis",sci:"Euoplos variabilis",flag:"🇦🇺"},
+    ]
+  },
+  {
+    id:"cyrtaucheniidae", name:"Cyrtaucheniidae", common:"Mygales cyrtauchéniides",
+    icon:"🕳️", ordre:"Mygalomorphae",
+    especes:159, genres:17,
+    taille:"moyen", taille_mm:"10–28 mm", danger:1,
+    continents:["afrique","asie","amerique_nord","amerique_sud"], toile:"terrier",
+    habitat:["desert","prairie"],
+    regime:["insectes"],
+    description:"Mygales construisant des terriers sans trappe ou avec trappe légère. Rastellum présent. Plusieurs sous-familles en révision.",
+    tags:[{l:"Mygalomorphes",c:"info"},{l:"Terricoles",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Cyrtauchenius walckenaeri",sci:"Cyrtauchenius walckenaeri",flag:"🇪🇺"},
+      {fr:"Ancylotrypa simon",sci:"Ancylotrypa simon",flag:"🌍"},
+      {fr:"Homostola gracilis",sci:"Homostola gracilis",flag:"🌍"},
+    ]
+  },
+  {
+    id:"mecicobothriidae", name:"Mecicobothriidae", common:"Mygales primitives Amérique",
+    icon:"🦕", ordre:"Mygalomorphae",
+    especes:9, genres:4,
+    taille:"moyen", taille_mm:"10–22 mm", danger:1,
+    continents:["amerique_nord"], toile:"terrier",
+    habitat:["foret"],
+    regime:["insectes"],
+    description:"Petite famille primitive de mygales d'Amérique du Nord. Parmi les mygales les moins étudiées. Terriers sans trappe.",
+    tags:[{l:"Primitive",c:"warn"},{l:"Rare",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Mecicobothrium thorelli",sci:"Mecicobothrium thorelli",flag:"🌎"},
+      {fr:"Hexura picea",sci:"Hexura picea",flag:"🇺🇸"},
+      {fr:"Megahexura fulva",sci:"Megahexura fulva",flag:"🇺🇸"},
+    ]
+  },
+  {
+    id:"antrodiaetidae", name:"Antrodiaetidae", common:"Mygales folding-door",
+    icon:"🚪", ordre:"Mygalomorphae",
+    especes:34, genres:2,
+    taille:"moyen", taille_mm:"8–20 mm", danger:1,
+    continents:["amerique_nord","asie"], toile:"terrier",
+    habitat:["foret","prairie"],
+    regime:["insectes"],
+    description:"Terriers avec couvercle replié en deux (folding-door). Abdomen segmenté visible. Amérique du Nord et Japon.",
+    tags:[{l:"Trappe pliante",c:"info"},{l:"Mygalomorphes",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Antrodiaetus riversi",sci:"Antrodiaetus riversi",flag:"🇺🇸"},
+      {fr:"Aliatypus gulosus",sci:"Aliatypus gulosus",flag:"🇺🇸"},
+      {fr:"Antrodiaetus unicolor",sci:"Antrodiaetus unicolor",flag:"🇺🇸"},
+    ]
+  },
+  {
+    id:"liphistiidae", name:"Liphistiidae", common:"Araignées à abdomen segmenté (primitives)",
+    icon:"🦕", ordre:"Mesothelae",
+    especes:105, genres:8,
+    taille:"moyen", taille_mm:"10–30 mm", danger:1,
+    continents:["asie"], toile:"terrier",
+    habitat:["foret","tropical"],
+    regime:["insectes"],
+    description:"Sous-ordre Mesothelae, le plus primitif. Abdomen avec segments visibles comme les insectes. Filières ventrales médianes. Fossiles vivants.",
+    tags:[{l:"FOSSILES VIVANTS",c:"danger"},{l:"Abdomen segmenté",c:"warn"},{l:"Asie uniquement",c:"info"}],
+    species:[
+      {fr:"Liphistius desultor",sci:"Liphistius desultor",flag:"🌏"},
+      {fr:"Liphistius batuensis",sci:"Liphistius batuensis",flag:"🌏"},
+      {fr:"Heptathela kimurai",sci:"Heptathela kimurai",flag:"🌏"},
+      {fr:"Heptathela nishihirai",sci:"Heptathela nishihirai",flag:"🌏"},
+      {fr:"Ryuthela nishihirai",sci:"Ryuthela nishihirai",flag:"🌏"},
+      {fr:"Sinothela sinensis",sci:"Sinothela sinensis",flag:"🌏"},
+    ]
+  },
+  {
+    id:"gradungulidae", name:"Gradungulidae", common:"Mygales primitives australiennes",
+    icon:"🦕", ordre:"Mygalomorphae",
+    especes:16, genres:7,
+    taille:"grand", taille_mm:"20–45 mm", danger:2,
+    continents:["oceanie"], toile:"cobweb",
+    habitat:["foret","grotte"],
+    regime:["insectes"],
+    description:"Famille primitive relique d'Australie et Nouvelle-Zélande. Vestiges d'une faune gondwanienne ancienne. Griffes tarsales nombreuses.",
+    tags:[{l:"Gondwana relique",c:"warn"},{l:"Primitive",c:"neutral"},{l:"Australie/NZ",c:"info"}],
+    species:[
+      {fr:"Gradungula sorenseni",sci:"Gradungula sorenseni",flag:"🇦🇺"},
+      {fr:"Macrogradungula moonya",sci:"Macrogradungula moonya",flag:"🇦🇺"},
+      {fr:"Spelungula cavernicola",sci:"Spelungula cavernicola",flag:"🇳🇿"},
+    ]
+  },
+  {
+    id:"pycnothelidae", name:"Pycnothelidae", common:"Mygales pycnothélides",
+    icon:"🌎", ordre:"Mygalomorphae",
+    especes:60, genres:9,
+    taille:"grand", taille_mm:"20–40 mm", danger:2,
+    continents:["amerique_sud"], toile:"terrier",
+    habitat:["tropical","foret"],
+    regime:["insectes"],
+    description:"Mygales d'Amérique du Sud. Certaines espèces avec stridulation audible. Corps robuste, coloration sombre.",
+    tags:[{l:"Amérique du Sud",c:"info"},{l:"Stridulation",c:"neutral"},{l:"Faible danger",c:"warn"}],
+    species:[
+      {fr:"Pycnothele modesta",sci:"Pycnothele modesta",flag:"🌎"},
+      {fr:"Sickius longibulbi",sci:"Sickius longibulbi",flag:"🌎"},
+      {fr:"Xenonemesia platensis",sci:"Xenonemesia platensis",flag:"🌎"},
+    ]
+  },
+  {
+    id:"microstigmatidae", name:"Microstigmatidae", common:"Mygales microstigmatides",
+    icon:"🔬", ordre:"Mygalomorphae",
+    especes:16, genres:6,
+    taille:"micro", taille_mm:"2–5 mm", danger:1,
+    continents:["amerique_sud","afrique","oceanie"], toile:"pas_de_toile",
+    habitat:["foret","tropical"],
+    regime:["insectes"],
+    description:"Mygales naines exceptionnellement petites. Certaines vivent dans la litière de feuilles. Peu étudiées et rarissimes.",
+    tags:[{l:"Mygales naines",c:"warn"},{l:"Rarissimes",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Microstigmata longipes",sci:"Microstigmata longipes",flag:"🌍"},
+      {fr:"Nesiergus insulanus",sci:"Nesiergus insulanus",flag:"🌍"},
+    ]
+  },
+  {
+    id:"zodariidae2", name:"Penestomidae + Zodariidae", common:"Araignées fourmilières africaines",
+    icon:"🐜", ordre:"Araneomorphae",
+    especes:220, genres:25,
+    taille:"petit", taille_mm:"3–10 mm", danger:1,
+    continents:["afrique","asie"], toile:"pas_de_toile",
+    habitat:["desert","prairie"],
+    regime:["insectes"],
+    description:"Araignées spécialisées dans la prédation des fourmis en milieux ouverts africains et asiatiques. Corps mimant les fourmis.",
+    tags:[{l:"Spécialistes fourmis",c:"info"},{l:"Afrique/Asie",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Asceua africana",sci:"Asceua africana",flag:"🌍"},
+      {fr:"Diores simoni",sci:"Diores simoni",flag:"🌍"},
+      {fr:"Cydrela bengalensis",sci:"Cydrela bengalensis",flag:"🌏"},
+    ]
+  },
+  {
+    id:"acanthoctenidae", name:"Acanthoctenidae", common:"Araignées acanthocténides",
+    icon:"🌿", ordre:"Araneomorphae",
+    especes:44, genres:4,
+    taille:"moyen", taille_mm:"10–20 mm", danger:2,
+    continents:["amerique_centrale","amerique_sud"], toile:"pas_de_toile",
+    habitat:["tropical","foret"],
+    regime:["insectes"],
+    description:"Araignées chasseuses d'Amérique centrale et du Sud. Proches des Ctenidae. Pattes épineuses, déplacement rapide.",
+    tags:[{l:"Amérique centrale",c:"info"},{l:"Chasseuses",c:"neutral"},{l:"Faible danger",c:"warn"}],
+    species:[
+      {fr:"Acanthoctenus spiniger",sci:"Acanthoctenus spiniger",flag:"🌎"},
+      {fr:"Oligoctenus ornatus",sci:"Oligoctenus ornatus",flag:"🌎"},
+    ]
+  },
+  {
+    id:"psechridae", name:"Psechridae", common:"Araignées à toile en nappe asiatiques",
+    icon:"🌏", ordre:"Araneomorphae",
+    especes:60, genres:2,
+    taille:"moyen", taille_mm:"10–25 mm", danger:1,
+    continents:["asie"], toile:"nappe",
+    habitat:["foret","tropical"],
+    regime:["insectes"],
+    description:"Toiles en nappe horizontale avec zone de retraite tubulaire. Construites près du sol en forêt. Asie du Sud-Est.",
+    tags:[{l:"Asie du Sud-Est",c:"info"},{l:"Toile en nappe",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Psechrus argentatus",sci:"Psechrus argentatus",flag:"🌏"},
+      {fr:"Psechrus torvus",sci:"Psechrus torvus",flag:"🌏"},
+      {fr:"Fecenia protensa",sci:"Fecenia protensa",flag:"🌏"},
+    ]
+  },
+  {
+    id:"oonopidae", name:"Oonopidae", common:"Araignées goblin",
+    icon:"👺", ordre:"Araneomorphae",
+    especes:1886, genres:115,
+    taille:"micro", taille_mm:"1–3 mm", danger:1,
+    continents:["cosmopolite"], toile:"pas_de_toile",
+    habitat:["foret","prairie","maison","tropical"],
+    regime:["insectes"],
+    description:"L'une des plus grandes familles par le nombre d'espèces. Minuscules araignées à 6 yeux, carapace souvent colorée (orange, rose). Chasseuses nocturnes.",
+    tags:[{l:"Micro",c:"neutral"},{l:"6 yeux",c:"info"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Oonops domesticus",sci:"Oonops domesticus",flag:"🇪🇺"},
+      {fr:"Oonops pulcher",sci:"Oonops pulcher",flag:"🇪🇺"},
+      {fr:"Orchestina pavesii",sci:"Orchestina pavesii",flag:"🇪🇺"},
+      {fr:"Gamasomorpha cataphracta",sci:"Gamasomorpha cataphracta",flag:"🌏"},
+      {fr:"Silhouettella loricatula",sci:"Silhouettella loricatula",flag:"🌍"},
+      {fr:"Triaeris stenaspis",sci:"Triaeris stenaspis",flag:"🌍"},
+    ]
+  },
+  {
+    id:"symphytognathidae", name:"Symphytognathidae", common:"Araignées les plus petites",
+    icon:"⚗️", ordre:"Araneomorphae",
+    especes:87, genres:10,
+    taille:"micro", taille_mm:"0.4–1.5 mm", danger:1,
+    continents:["cosmopolite"], toile:"orbitele",
+    habitat:["foret","grotte","tropical"],
+    regime:["insectes"],
+    description:"Parmi les araignées les plus petites du monde. Patu digua (Colombie) mesure 0.37 mm — record mondial. Toiles orbitèles miniatures.",
+    tags:[{l:"Plus petites du monde",c:"warn"},{l:"< 1 mm",c:"danger"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Patu digua (0.37 mm - plus petite araignee connue)",sci:"Patu digua",flag:"🌎"},
+      {fr:"Anapistula ataecina",sci:"Anapistula ataecina",flag:"🇪🇺"},
+      {fr:"Symphytognatha globosa",sci:"Symphytognatha globosa",flag:"🌎"},
+      {fr:"Crassignatha danaugirang",sci:"Crassignatha danaugirang",flag:"🌏"},
+    ]
+  },
+  {
+    id:"anapidae", name:"Anapidae", common:"Araignées anapides",
+    icon:"🔬", ordre:"Araneomorphae",
+    especes:197, genres:52,
+    taille:"micro", taille_mm:"0.5–3 mm", danger:1,
+    continents:["cosmopolite"], toile:"orbitele",
+    habitat:["foret","grotte"],
+    regime:["insectes"],
+    description:"Araignées minuscules construisant de petites toiles à fils horizontaux. Corps souvent sphérique et brillant. Litière de feuilles.",
+    tags:[{l:"Micro",c:"neutral"},{l:"Corps sphérique",c:"info"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Anapisona simoni",sci:"Anapisona simoni",flag:"🌎"},
+      {fr:"Comaroma simonii",sci:"Comaroma simonii",flag:"🇪🇺"},
+      {fr:"Pseudanapis parocula",sci:"Pseudanapis parocula",flag:"🌏"},
+    ]
+  },
+  {
+    id:"mysmenidae2", name:"Arachnoscelididae", common:"Araignées arachnoscelidides",
+    icon:"🔬", ordre:"Araneomorphae",
+    especes:14, genres:3,
+    taille:"micro", taille_mm:"1–2 mm", danger:1,
+    continents:["amerique_sud"], toile:"orbitele",
+    habitat:["foret","tropical"],
+    regime:["insectes"],
+    description:"Famille récemment décrite d'Amérique du Sud. Pattes postérieures très allongées. Toiles construites dans la végétation basse.",
+    tags:[{l:"Récemment décrite",c:"warn"},{l:"Amérique du Sud",c:"info"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Arachnoscelis arachnomimus",sci:"Arachnoscelis arachnomimus",flag:"🌎"},
+    ]
+  },
+  {
+    id:"telemidae2", name:"Caponiidae", common:"Araignées caponiides",
+    icon:"👁️", ordre:"Araneomorphae",
+    especes:110, genres:14,
+    taille:"moyen", taille_mm:"5–18 mm", danger:1,
+    continents:["afrique","asie","amerique_nord","amerique_sud"], toile:"pas_de_toile",
+    habitat:["desert","foret"],
+    regime:["insectes"],
+    description:"Araignées à 2 yeux seulement (la plupart des araignées en ont 8). Pattes à 2 griffes. Certaines espèces sans yeux.",
+    tags:[{l:"2 yeux seulement",c:"warn"},{l:"Rare",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Caponia natalensis",sci:"Caponia natalensis",flag:"🌍"},
+      {fr:"Caponia caffra",sci:"Caponia caffra",flag:"🌍"},
+      {fr:"Tiaroga cobra",sci:"Tiaroga cobra",flag:"🇺🇸"},
+    ]
+  },
+  {
+    id:"tengellidae", name:"Tengellidae", common:"Araignées tengellides",
+    icon:"🌿", ordre:"Araneomorphae",
+    especes:103, genres:19,
+    taille:"moyen", taille_mm:"6–16 mm", danger:1,
+    continents:["amerique_nord","amerique_sud","asie"], toile:"nappe",
+    habitat:["foret","prairie"],
+    regime:["insectes"],
+    description:"Toiles en nappe plate avec tube de retraite. Présentes surtout en Amérique et dans certaines régions d'Asie.",
+    tags:[{l:"Toile en nappe",c:"info"},{l:"Inoffensives",c:"safe"},{l:"Amériques/Asie",c:"neutral"}],
+    species:[
+      {fr:"Tengella radiata",sci:"Tengella radiata",flag:"🌎"},
+      {fr:"Liocranoides unicolor",sci:"Liocranoides unicolor",flag:"🇺🇸"},
+    ]
+  },
+  {
+    id:"cithaeronidae", name:"Cithaeronidae", common:"Araignées cithaeronides",
+    icon:"🌍", ordre:"Araneomorphae",
+    especes:8, genres:2,
+    taille:"moyen", taille_mm:"8–16 mm", danger:1,
+    continents:["afrique","asie"], toile:"pas_de_toile",
+    habitat:["desert","prairie"],
+    regime:["insectes"],
+    description:"Très petite famille d'Afrique et Asie du Sud. Corps allongé, pattes longues. Nocturne. Classification longtemps incertaine.",
+    tags:[{l:"Afrique/Asie",c:"info"},{l:"Rarissime",c:"warn"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Cithaeron praedonius",sci:"Cithaeron praedonius",flag:"🌍"},
+      {fr:"Afrikarachne leleupi",sci:"Afrikarachne leleupi",flag:"🌍"},
+    ]
+  },
+  {
+    id:"zoropsidae2", name:"Udubidae", common:"Araignées udubides",
+    icon:"🌍", ordre:"Araneomorphae",
+    especes:26, genres:6,
+    taille:"petit", taille_mm:"4–12 mm", danger:1,
+    continents:["afrique"], toile:"pas_de_toile",
+    habitat:["foret","tropical"],
+    regime:["insectes"],
+    description:"Petite famille africaine. Araignées chasseuses diurnes vivant sur la végétation. Coloration souvent vive.",
+    tags:[{l:"Afrique",c:"info"},{l:"Diurnes",c:"neutral"},{l:"Inoffensives",c:"safe"}],
+    species:[
+      {fr:"Uduba variabilis",sci:"Uduba variabilis",flag:"🌍"},
+      {fr:"Kilima transvaalense",sci:"Kilima transvaalense",flag:"🌍"},
+    ]
+  },
+];
+
+let currentView = 'grid';
+let filteredData = [...DATA];
+
+const grid = document.getElementById('grid-container');
+const list = document.getElementById('list-container');
+const rcount = document.getElementById('rcount');
+const sidebar = document.getElementById('order-list');
+
+function tagHTML(tags) {
+  return tags.map(t => `<span class="tag tag-${t.c}">${t.l}</span>`).join('');
+}
+
+function dangerDot(d) {
+  return `<div class="danger-dot dd-${d}" title="Dangerosité ${d}/5"></div>`;
+}
+
+function metaHTML(f) {
+  return `
+    <div class="meta-item"><span class="meta-key">Taille</span><span class="meta-val">${f.taille_mm}</span></div>
+    <div class="meta-item"><span class="meta-key">Espèces</span><span class="meta-val">${f.especes.toLocaleString('fr')}</span></div>
+    <div class="meta-item"><span class="meta-key">Genres</span><span class="meta-val">${f.genres}</span></div>
+    <div class="meta-item"><span class="meta-key">Ordre</span><span class="meta-val">${f.ordre}</span></div>
+  `;
+}
+
+function speciesHTML(species) {
+  return species.map(s => `
+    <div class="sp-row">
+      <span class="sp-flag">${s.flag}</span>
+      <span class="sp-fr">${s.fr}</span>
+      <span class="sp-sci">${s.sci}</span>
+    </div>
+  `).join('');
+}
+
+function renderGrid(data) {
+  grid.innerHTML = '';
+  if (!data.length) {
+    grid.innerHTML = '<div class="no-results"><div class="no-results-icon">🕸️</div><p>Aucune famille correspondante…</p></div>';
+    return;
+  }
+  data.forEach((f, i) => {
+    const card = document.createElement('div');
+    card.className = 'fcard';
+    card.style.animationDelay = (i * 0.03) + 's';
+    card.innerHTML = `
+      <div class="fcard-header">
+        <div class="fcard-icon">${f.icon}</div>
+        <div class="fcard-titles">
+          <div class="fname">${f.name}</div>
+          <div class="fcommon">${f.common}</div>
+        </div>
+        ${dangerDot(f.danger)}
+      </div>
+      <div class="fcard-tags">${tagHTML(f.tags)}</div>
+      <div class="fcard-meta">${metaHTML(f)}</div>
+      <div class="fcard-divider"></div>
+      <div class="species-section" id="sp-${f.id}">
+        <div class="species-title">Espèces représentatives</div>
+        <div class="species-grid">${speciesHTML(f.species)}</div>
+      </div>
+      <button class="toggle-sp" id="btn-${f.id}" data-id="${f.id}" data-count="${f.species.length}" type="button">
+        <span>Voir les ${f.species.length} espèces</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function renderList(data) {
+  list.innerHTML = '';
+  if (!data.length) {
+    list.innerHTML = '<div class="no-results"><div class="no-results-icon">🕸️</div><p>Aucune famille correspondante…</p></div>';
+    return;
+  }
+  data.forEach((f, i) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'lcard-wrapper';
+    wrap.style.animationDelay = (i * 0.02) + 's';
+    wrap.innerHTML = `
+      <div class="lcard" data-id="${f.id}" style="cursor:pointer;">
+        <div class="lcard-icon">${f.icon}</div>
+        <div class="lcard-name">
+          <div class="lcard-fname">${f.name}</div>
+          <div class="lcard-common">${f.common}</div>
+        </div>
+        <div class="lcard-tags">${tagHTML(f.tags)}</div>
+        <div class="lcard-meta">
+          <div class="lcard-mitem"><div class="lcard-mk">Taille</div><div class="lcard-mv">${f.taille_mm}</div></div>
+          <div class="lcard-mitem"><div class="lcard-mk">Espèces</div><div class="lcard-mv">${f.especes.toLocaleString('fr')}</div></div>
+          <div class="lcard-mitem"><div class="lcard-mk">Danger</div><div class="lcard-mv">${f.danger}/5</div></div>
+        </div>
+        <span class="lcard-arrow">›</span>
+      </div>
+      <div class="lcard-species" id="lsp-${f.id}">
+        <div class="species-title">Espèces représentatives</div>
+        <div class="species-grid">${speciesHTML(f.species)}</div>
+      </div>
+    `;
+    list.appendChild(wrap);
+  });
+}
+
+function toggleSp(id) {
+  const sec = document.getElementById('sp-'+id);
+  const btn = document.getElementById('btn-'+id);
+  if (!sec || !btn) return;
+  const open = sec.classList.contains('open');
+  sec.classList.toggle('open');
+  btn.classList.toggle('open');
+  btn.querySelector('span').textContent = open ? `Voir les ${btn.dataset.count} espèces` : 'Réduire';
+}
+
+function toggleLSp(id) {
+  const sec = document.getElementById('lsp-'+id);
+  sec.classList.toggle('open');
+}
+
+function buildSidebar(data) {
+  const orders = {};
+  data.forEach(f => {
+    if (!orders[f.ordre]) orders[f.ordre] = 0;
+    orders[f.ordre]++;
+  });
+  sidebar.innerHTML = Object.entries(orders).map(([k,v]) => `
+    <button class="order-btn active" data-order="${k}" type="button">
+      <span>${k}</span>
+      <span class="order-count">${v}</span>
+    </button>
+  `).join('');
+}
+
+function applyFilters() {
+  const q = document.getElementById('search').value.toLowerCase();
+  const continent = document.getElementById('f-continent').value;
+  const danger = document.getElementById('f-danger').value;
+  const taille = document.getElementById('f-taille').value;
+  const toile = document.getElementById('f-toile').value;
+  const habitat = document.getElementById('f-habitat').value;
+  const regime = document.getElementById('f-regime').value;
+
+  filteredData = DATA.filter(f => {
+    if (q) {
+      const hay = (f.name+f.common+f.species.map(s=>s.fr+s.sci).join(' ')+f.description).toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    if (continent && !f.continents.includes(continent)) return false;
+    if (danger && f.danger !== parseInt(danger)) return false;
+    if (taille && f.taille !== taille) return false;
+    if (toile && f.toile !== toile) return false;
+    if (habitat && !f.habitat.includes(habitat)) return false;
+    if (regime && !f.regime.includes(regime)) return false;
+    return true;
+  });
+
+  rcount.textContent = `${filteredData.length} famille${filteredData.length!==1?'s':''}`;
+  if (currentView === 'grid') renderGrid(filteredData);
+  else renderList(filteredData);
+  buildSidebar(filteredData);
+}
+
+// ── Event delegation — iOS Safari compatible ──
+// Grid: toggle-sp buttons
+grid.addEventListener('click', function(e) {
+  const btn = e.target.closest('.toggle-sp');
+  if (btn) {
+    e.preventDefault();
+    toggleSp(btn.dataset.id);
+    return;
+  }
+});
+
+// List: lcard click
+list.addEventListener('click', function(e) {
+  const card = e.target.closest('.lcard');
+  if (card) {
+    e.preventDefault();
+    const id = card.dataset.id;
+    const sec = document.getElementById('lsp-'+id);
+    if (sec) sec.classList.toggle('open');
+  }
+});
+
+// Sidebar: order filter buttons
+sidebar.addEventListener('click', function(e) {
+  const btn = e.target.closest('.order-btn');
+  if (btn) {
+    e.preventDefault();
+  }
+});
+
+// View toggle
+document.getElementById('vgrid').addEventListener('click', () => {
+  currentView = 'grid';
+  document.getElementById('vgrid').classList.add('active');
+  document.getElementById('vlist').classList.remove('active');
+  grid.style.display = '';
+  list.style.display = 'none';
+  renderGrid(filteredData);
+});
+
+document.getElementById('vlist').addEventListener('click', () => {
+  currentView = 'list';
+  document.getElementById('vlist').classList.add('active');
+  document.getElementById('vgrid').classList.remove('active');
+  list.style.display = '';
+  grid.style.display = 'none';
+  renderList(filteredData);
+});
+
+// Filters
+['search','f-continent','f-danger','f-taille','f-toile','f-habitat','f-regime'].forEach(id => {
+  document.getElementById(id).addEventListener('input', applyFilters);
+  document.getElementById(id).addEventListener('change', applyFilters);
+});
+
+document.getElementById('clear-btn').addEventListener('click', () => {
+  document.getElementById('search').value = '';
+  ['f-continent','f-danger','f-taille','f-toile','f-habitat','f-regime'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  applyFilters();
+});
+
+// Init
+applyFilters();
+</script>
+</body>
+</html>

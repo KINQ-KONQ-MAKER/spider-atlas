@@ -526,6 +526,16 @@ select:focus, select:hover { border-color: var(--accent-dim); color: var(--text)
   to { opacity: 1; transform: translateY(0); }
 }
 .fcard, .lcard-wrapper { animation: fadeIn 0.3s ease both; }
+
+/* iOS Safari fixes */
+.toggle-sp, .lcard, .vbtn, .tab, .order-btn, .clear-btn {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+button { -webkit-appearance: none; }
+input[type="search"] { -webkit-appearance: none; border-radius: 8px; }
+
 </style>
 </head>
 <body>
@@ -2285,7 +2295,7 @@ function renderGrid(data) {
         <div class="species-title">Espèces représentatives</div>
         <div class="species-grid">${speciesHTML(f.species)}</div>
       </div>
-      <button class="toggle-sp" id="btn-${f.id}" onclick="toggleSp('${f.id}')">
+      <button class="toggle-sp" id="btn-${f.id}" data-id="${f.id}" data-count="${f.species.length}" type="button">
         <span>Voir les ${f.species.length} espèces</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
       </button>
@@ -2305,7 +2315,7 @@ function renderList(data) {
     wrap.className = 'lcard-wrapper';
     wrap.style.animationDelay = (i * 0.02) + 's';
     wrap.innerHTML = `
-      <div class="lcard" onclick="toggleLSp('${f.id}')">
+      <div class="lcard" data-id="${f.id}" style="cursor:pointer;">
         <div class="lcard-icon">${f.icon}</div>
         <div class="lcard-name">
           <div class="lcard-fname">${f.name}</div>
@@ -2331,10 +2341,11 @@ function renderList(data) {
 function toggleSp(id) {
   const sec = document.getElementById('sp-'+id);
   const btn = document.getElementById('btn-'+id);
+  if (!sec || !btn) return;
   const open = sec.classList.contains('open');
   sec.classList.toggle('open');
   btn.classList.toggle('open');
-  btn.querySelector('span').textContent = open ? `Voir les ${DATA.find(f=>f.id===id).species.length} espèces` : 'Réduire';
+  btn.querySelector('span').textContent = open ? `Voir les ${btn.dataset.count} espèces` : 'Réduire';
 }
 
 function toggleLSp(id) {
@@ -2349,15 +2360,11 @@ function buildSidebar(data) {
     orders[f.ordre]++;
   });
   sidebar.innerHTML = Object.entries(orders).map(([k,v]) => `
-    <button class="order-btn active" data-order="${k}" onclick="filterOrder('${k}', this)">
+    <button class="order-btn active" data-order="${k}" type="button">
       <span>${k}</span>
       <span class="order-count">${v}</span>
     </button>
   `).join('');
-}
-
-function filterOrder(order, btn) {
-  // Toggle
 }
 
 function applyFilters() {
@@ -2388,6 +2395,36 @@ function applyFilters() {
   else renderList(filteredData);
   buildSidebar(filteredData);
 }
+
+// ── Event delegation — iOS Safari compatible ──
+// Grid: toggle-sp buttons
+grid.addEventListener('click', function(e) {
+  const btn = e.target.closest('.toggle-sp');
+  if (btn) {
+    e.preventDefault();
+    toggleSp(btn.dataset.id);
+    return;
+  }
+});
+
+// List: lcard click
+list.addEventListener('click', function(e) {
+  const card = e.target.closest('.lcard');
+  if (card) {
+    e.preventDefault();
+    const id = card.dataset.id;
+    const sec = document.getElementById('lsp-'+id);
+    if (sec) sec.classList.toggle('open');
+  }
+});
+
+// Sidebar: order filter buttons
+sidebar.addEventListener('click', function(e) {
+  const btn = e.target.closest('.order-btn');
+  if (btn) {
+    e.preventDefault();
+  }
+});
 
 // View toggle
 document.getElementById('vgrid').addEventListener('click', () => {
